@@ -5,6 +5,7 @@ import getPostsAsync from "../actions/getPosts";
 import getCategoriesAsync from "../actions/getCategories";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history } from "react-router-dom";
+import sortBy from 'sort-by';
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         this.props.getCategories();
     }
   render() {
+      let posts = this.props.posts;
     return (
       <div className="App">
       <div className="categories">Categories:
@@ -22,12 +24,13 @@ class App extends Component {
       </div>
         <div className="posts">
         <ul>Posts:
-            {this.props.posts.map(post => (
+            {posts.map(post => (
                 <li key={post.id} >
                     <h2>{post.title}</h2>
                     <h4>{post.body}</h4>
                     <p>Category: {post.category}</p>
                     <p>Votes: {post.voteScore}</p>
+                    <p>Time: {new Date(post.timestamp).toGMTString()}</p>
                 </li>
             ))}
           </ul>
