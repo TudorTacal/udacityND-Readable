@@ -10,3 +10,7 @@
 .categories {
     display: inline-block;
 }
+
+.categories a {
+    padding: 10px;
+}

@@ -4,6 +4,8 @@ import * as api from "../utils/readableApi";
 import getPostsAsync from "../actions/getPosts";
 import getCategoriesAsync from "../actions/getCategories";
 import { fetchPosts } from "../utils/readableApi";
+import { Route, Router, Link, history } from "react-router-dom";
+
 
 class App extends Component {
     componentDidMount() {
@@ -13,13 +15,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <div className="categories">Categories
+      <div className="categories">Categories:
         {this.props.categories.map(category => (
-                    <p key={category.name}>{category.name}</p>
+                <Link key={category.name} to={`/${category.path}`}>{category.name}</Link>
         ))}
       </div>
         <div className="posts">
-        <ul>
+        <ul>Posts:
             {this.props.posts.map(post => (
                 <li key={post.id} >
                     <h2>{post.title}</h2>
