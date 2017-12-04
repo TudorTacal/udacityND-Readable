@@ -1,0 +1,12 @@
+.wrapper{
+    background-color: #fef;
+    text-align: Center;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+
+.categories {
+    display: inline-block;
+}
