@@ -11,6 +11,12 @@
     display: inline-block;
 }
 
-.categories a {
-    padding: 10px;
+
+a {
+    padding: 10px;    
+}
+
+.createPost {
+    display: block;
+    
 }

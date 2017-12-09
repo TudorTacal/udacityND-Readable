@@ -13,13 +13,6 @@ const app = express()
 app.use(express.static('public'))
 app.use(cors())
 
-let token = 'Tudor'
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': token
-}
-
 app.get('/', (req, res) => {
   const help = `
   <pre>
@@ -118,7 +111,7 @@ app.get('/', (req, res) => {
   res.send(help)
 })
 
-app.use((req, res, next, headers) => {
+app.use((req, res, next) => {
   const token = req.get('Authorization')
 
   if (token) {
