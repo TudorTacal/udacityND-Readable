@@ -12,7 +12,7 @@ function orderPostsAsync(orderPostsBy) {
     let orderedPosts;
     return (dispatch, getState) => {
         orderedPosts = getState().posts.posts;
-        orderedPosts.sort(sortBy(orderPostsBy));
+        orderedPosts.sort(sortBy("-"+orderPostsBy));
        dispatch(orderPosts(orderedPosts));
     }
 }
