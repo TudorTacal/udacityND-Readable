@@ -4,9 +4,9 @@ import * as api from "../utils/readableApi";
 import getPostsAsync from "../actions/getPosts";
 import getCategoriesAsync from "../actions/getCategories";
 import createPostAsync from "../actions/createPost";
+import orderPostsAsync from "../actions/orderPosts";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history, withRouter } from "react-router-dom";
-import sortBy from "sort-by";
 
 class App extends Component {
 
@@ -16,7 +16,8 @@ class App extends Component {
             title: "",
             body: "",
             category: "",
-            author: ""
+            author: "",
+            postOrderBy: ""
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -77,6 +78,13 @@ class App extends Component {
               </div>
             </div>
           )}/>
+          <div className="postsSortChanger">
+            <select  defaultValue={this.props.postOrderBy || "none"} onChange={(event) => {this.props.orderPosts(event.target.value)}}>
+              <option value="none" disabled>Sort by...</option>
+              <option value="voteScore" >Vote Score</option> 
+              <option value="timestamp" >Timestamp</option>
+            </select>
+          </div>
         {categories.map(category => (
             <Route key={category.name}
                 path={`/${category.path}`}
@@ -111,6 +119,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const props = Object.assign({}, state, {
+    orderPostsBy: state.orderPostsBy,
     posts: state.posts.posts,
     categories: state.categories.categories
   });
@@ -127,6 +136,9 @@ function mapDispatchToProps(dispatch) {
     }, 
     createPost: (values) => {
         dispatch(createPostAsync(values));
+    },
+    orderPosts: (orderPostsBy) => {
+        dispatch(orderPostsAsync(orderPostsBy));
     }
   };
 }
