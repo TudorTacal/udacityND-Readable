@@ -12,6 +12,8 @@ function PostsList(props) {
             <h4>{post.body}</h4>
             <p>Category: {post.category}</p>
             <p>Votes: {post.voteScore}</p>
+            <button onClick={() => { return props.onClickUpVote(post.id)}}>+</button>
+            <button>-</button>
             <p>Time: {new Date(post.timestamp).toGMTString()}</p>
             <Link className="addPost" to="/posts">
               Add post

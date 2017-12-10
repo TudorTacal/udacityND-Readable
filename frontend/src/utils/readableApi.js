@@ -1,7 +1,5 @@
 let token = 'Tudor'
 
-
-
 const headers = {
     'Accept': 'application/json',
     'Authorization': token,
@@ -11,4 +9,5 @@ const headers = {
 export const fetchPosts = () => fetch('/posts',  { headers});
 export const fetchCategories = () => fetch('/categories',  { headers});
 export const fetchPostPost = (postData) => fetch('/posts', { method: 'POST',  headers, body: JSON.stringify(postData)});
+export const fetchPostVote = (id, option) => fetch(`/posts/${id}`, { method: 'POST', headers, body: JSON.stringify(option)});
 
