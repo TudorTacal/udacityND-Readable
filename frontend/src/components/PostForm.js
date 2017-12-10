@@ -2,7 +2,7 @@ import React, { Compoenent } from "react";
 
 function PostForm(props) {
   return (
-    <form className={`${props.type}form`}>
+    <form className={`${props.type}form`} onSubmit={event => event.preventDefault()}>
       Add post
       <input
         type="text"

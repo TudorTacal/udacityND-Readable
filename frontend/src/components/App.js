@@ -6,6 +6,7 @@ import getCategoriesAsync from "../actions/getCategories";
 import createPostAsync from "../actions/createPost";
 import orderPostsAsync from "../actions/orderPosts";
 import upVotePostAsync from "../actions/upVotePost";
+import downVotePostAsync from "../actions/downVotePost";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history, withRouter } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
@@ -55,7 +56,7 @@ class App extends Component {
         <Route exact path="/" render={(history) => (
             <div>
                 <CategoriesList categories={categories}/>
-                <PostsList posts={posts} onClickUpVote={this.props.upVotePost} />
+                <PostsList posts={posts} onClickUpVote={this.props.upVotePost} onClickDownVote={this.props.downVotePost} />
                 <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
             </div>
           )}/>
@@ -103,6 +104,9 @@ function mapDispatchToProps(dispatch) {
     },
     upVotePost: (id) => {
         dispatch(upVotePostAsync(id));
+    },
+    downVotePost: (id) => {
+        dispatch(downVotePostAsync(id));
     }
   };
 }
