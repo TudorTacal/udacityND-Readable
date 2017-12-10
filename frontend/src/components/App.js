@@ -107,7 +107,7 @@ function mapDispatchToProps(dispatch) {
     },
     downVotePost: (id) => {
         dispatch(downVotePostAsync(id));
-    }
+    },
   };
 }
 

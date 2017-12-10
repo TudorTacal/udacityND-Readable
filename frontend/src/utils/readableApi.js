@@ -10,4 +10,4 @@ export const fetchPosts = () => fetch('/posts',  { headers});
 export const fetchCategories = () => fetch('/categories',  { headers});
 export const fetchPostPost = (postData) => fetch('/posts', { method: 'POST',  headers, body: JSON.stringify(postData)});
 export const fetchPostVote = (id, option) => fetch(`/posts/${id}`, { method: 'POST', headers, body: JSON.stringify(option)});
-
+export const fetchPostComments = (id) => fetch(`/posts/${id}/comments`, { headers});
