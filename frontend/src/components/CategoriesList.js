@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class CategoriesList extends React.Component {
-  render() {
+function CategoriesList(props) {
     return (
       <div className="categories">
         Categories:
-        {this.props.categories.map(category => (
+        {props.categories.map(category => (
           <div key={category.path} className="category">
             <Link key={category.name} to={`/${category.path}`}>
               {category.name}
@@ -15,7 +14,6 @@ class CategoriesList extends React.Component {
         ))}
       </div>
     );
-  }
 }
 
 export default CategoriesList;
