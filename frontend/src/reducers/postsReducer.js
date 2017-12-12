@@ -2,8 +2,7 @@ import { GET_POSTS } from '../actions/getPosts';
 import { ORDER_POSTS } from '../actions/orderPosts';
 import { UP_VOTE_POST } from '../actions/upVotePost';
 import { DOWN_VOTE_POST } from '../actions/downVotePost';
-
-
+import { GET_POST_COMMENTS } from '../actions/getPostComments';
 
 let initialState = {
     posts: []
@@ -25,6 +24,10 @@ function posts(state = initialState, action) {
     case DOWN_VOTE_POST: {
         let posts = state.posts.map(post => post).map(post => post.id === action.post.id ? action.post : post)
         return Object.assign({}, state, { posts });
+    }
+    case GET_POST_COMMENTS: {
+        console.log('Is this trigerring?')
+        return Object.assign({}, state, {postComments: action.data})
     }
     default:
       return state;

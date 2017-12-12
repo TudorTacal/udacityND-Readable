@@ -10,7 +10,7 @@ function getCategories(categories) {
 
 function getCategoriesAsync() {
     return dispatch => {
-        fetchCategories().then(res => res.json()).then(data => {dispatch(getCategories(data.categories))});
+        fetchCategories().then(res => res.json()).then(data => dispatch(getCategories(data.categories)));
     }
 }
 

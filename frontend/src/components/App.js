@@ -5,14 +5,13 @@ import getPostsAsync from "../actions/getPosts";
 import getCategoriesAsync from "../actions/getCategories";
 import createPostAsync from "../actions/createPost";
 import orderPostsAsync from "../actions/orderPosts";
-import upVotePostAsync from "../actions/upVotePost";
-import downVotePostAsync from "../actions/downVotePost";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history, withRouter } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
 import PostsList from "./PostsList";
 import PostsOrderChanger from "./PostsOrderChanger";
 import PostForm from "./PostForm";
+import Post from "./Post";
 
 class App extends Component {
 
@@ -52,29 +51,37 @@ class App extends Component {
     let posts = this.props.posts;
     let categories = this.props.categories;
     return (
-      <div className="App">
-        <Route exact path="/" render={(history) => (
-            <div>
-                <CategoriesList categories={categories}/>
-                <PostsList posts={posts} onClickUpVote={this.props.upVotePost} onClickDownVote={this.props.downVotePost} />
-                <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+            <div className="App">
+                <Route exact path="/" render={(history) => (
+                    <div>
+                        <CategoriesList categories={categories}/>
+                        <PostsList posts={posts} />
+                        <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+                    </div>
+                )}/>
+                {categories.map(category => (
+                    <Route exact key={category.name}
+                        path={`/${category.path}`}
+                        render={(history) => (
+                        <div>
+                            <PostsList posts={posts.filter(post => post.category === category.name)}/>
+                            <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+                        </div>
+                    )}
+                />
+                ))}
+                <Route exact path="/posts" render={() => (
+                    <PostForm type="Create" onInputChange={this.handleInputChange} onSubmitClick={this.handleSubmit}/>
+                )}/>
+                {posts.map(post => (
+                    <Route key={post.id}
+                        exact
+                        path={`/${post.category}/${post.id}`}
+                        render={() => (
+                            <Post post={post}/>
+                        )}/>
+                ))}
             </div>
-          )}/>
-        {categories.map(category => (
-            <Route key={category.name}
-                path={`/${category.path}`}
-                render={(history) => (
-                <div>
-                    <PostsList posts={posts.filter(post => post.category === category.name)}/>
-                    <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
-                </div>
-            )}
-          />
-        ))}
-        <Route path="/posts" render={() => (
-            <PostForm type="Create" onInputChange={this.handleInputChange} onSubmitClick={this.handleSubmit}/>
-        )}/>
-      </div>
     );
   }
 }
@@ -101,13 +108,7 @@ function mapDispatchToProps(dispatch) {
     },
     orderPosts: (orderPostsBy) => {
         dispatch(orderPostsAsync(orderPostsBy));
-    },
-    upVotePost: (id) => {
-        dispatch(upVotePostAsync(id));
-    },
-    downVotePost: (id) => {
-        dispatch(downVotePostAsync(id));
-    },
+    }
   };
 }
 

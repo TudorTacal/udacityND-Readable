@@ -10,7 +10,7 @@ function getPosts(posts) {
 
 function getPostsAsync() {
     return dispatch => {
-        fetchPosts().then(res => res.json()).then(data => {dispatch(getPosts(data))});
+        fetchPosts().then(res => res.json()).then(data => dispatch(getPosts(data)));
     }
 }
 

@@ -13,7 +13,7 @@ function orderPostsAsync(orderPostsBy) {
     return (dispatch, getState) => {
         orderedPosts = getState().posts.posts;
         orderedPosts.sort(sortBy("-"+orderPostsBy));
-       dispatch(orderPosts(orderedPosts));
+      return  dispatch(orderPosts(orderedPosts));
     }
 }
 

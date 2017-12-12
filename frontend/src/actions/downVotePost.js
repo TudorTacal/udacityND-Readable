@@ -12,7 +12,7 @@ function downVotePost(post) {
 function downVotePostAsync(id) {
     return dispatch => {
         let option = {option: "downVote"};
-        fetchPostVote(id, option).then(res => { return res.json()}).then(data => { return dispatch(downVotePost(data))});
+        fetchPostVote(id, option).then(res => { return res.json()}).then(data =>  dispatch(downVotePost(data)));
     }
 }
 

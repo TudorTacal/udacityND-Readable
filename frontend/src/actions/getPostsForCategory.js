@@ -10,7 +10,7 @@ function getPostsForCategory(postsForCategory) {
 
 function getPostsForCategoryAsync(categoryPath) {
     return dispatch => {
-        fetchPostsForCategory(categoryPath).then(res => res.json()).then(data => {dispatch(getPostsForCategory(data ))});
+        fetchPostsForCategory(categoryPath).then(res => res.json()).then(data => dispatch(getPostsForCategory(data )));
     }
 }
 
