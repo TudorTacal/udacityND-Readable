@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import Comment from "./Comment";
 import upVotePostAsync from "../actions/upVotePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
 
 class Post extends React.Component {
-    componentDidMount() {
-        console.log(this.props.post.id);
+    componentWillMount() {
         return this.props.getComments(this.props.post.id);
     }
   render() {
@@ -17,7 +17,6 @@ class Post extends React.Component {
         <Link className="postView" to={`/${post.category}/${post.id}`}>
           {post.title}
         </Link>
-        {console.log(this.props.postComments)}
         <h4>{post.body}</h4>
         <p>Author: {post.author}</p>
         <p>Time: {new Date(post.timestamp).toGMTString()}</p>
@@ -43,14 +42,17 @@ class Post extends React.Component {
         <Link className="editPost" to={`/posts/:${post.id}`}>
           Edit post
         </Link>
-        <p>Comments: {post.commentCount}</p>
+        <p>{post.commentCount} comments</p>
+        {this.props.displayComments && this.props.comments.map(comment => (
+            <div key={comment.id} className="comments"><Comment comment={comment} /></div>
+        ))}
       </div>
     );
   }
 }
 function mapStateToProps(state) {
     const props = Object.assign({}, state, {
-        comments: state.comments
+        comments: state.posts.comments
     })
     return props;
 }

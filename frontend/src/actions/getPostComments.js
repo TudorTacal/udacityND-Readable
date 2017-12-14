@@ -14,7 +14,7 @@ function getPostCommentsAsync(id) {
     return dispatch => {
         fetchPostComments(id).then(res => {
             return res.json()
-        }).then(data => {console.log(data); return dispatch(getPostComments(data))});
+        }).then(data => { return dispatch(getPostComments(data))});
     }
 }
 

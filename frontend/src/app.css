@@ -1,14 +1,12 @@
-.wrapper{
-    background-color: #fef;
-    text-align: Center;
+.App{
+    background-color: white;
     width: 80%;
     margin: 0 auto;
-    margin-top: 5%;
 }
 
 
 .categories {
-    display: inline-block;
+    display: inline;    
 }
 
 
@@ -25,4 +23,19 @@ a {
     font-size: 20px;
     text-decoration:  none;
     padding: 0px;
+}
+
+.comment {
+    border: 1px solid #f2f2f2;
+    margin-bottom: 2px;
+    padding: 3px;
+}
+
+span {
+    padding: 3px;
+    font-size: small;
+}
+
+.posts ul {
+    list-style: none;
 }

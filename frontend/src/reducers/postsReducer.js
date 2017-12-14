@@ -27,8 +27,7 @@ function posts(state = initialState, action) {
         return Object.assign({}, state, { posts });
     }
     case GET_POST_COMMENTS: {
-        console.log('Is this trigerring?', action.comments);
-        return Object.assign({}, state, {comments: action.data})
+        return Object.assign({}, state, {comments: action.comments})
     }
     default:
       return state;
