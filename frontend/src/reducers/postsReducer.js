@@ -5,7 +5,8 @@ import { DOWN_VOTE_POST } from '../actions/downVotePost';
 import { GET_POST_COMMENTS } from '../actions/getPostComments';
 
 let initialState = {
-    posts: []
+    posts: [],
+    comments: []
 }
 
 function posts(state = initialState, action) {
@@ -26,8 +27,8 @@ function posts(state = initialState, action) {
         return Object.assign({}, state, { posts });
     }
     case GET_POST_COMMENTS: {
-        console.log('Is this trigerring?')
-        return Object.assign({}, state, {postComments: action.data})
+        console.log('Is this trigerring?', action.comments);
+        return Object.assign({}, state, {comments: action.data})
     }
     default:
       return state;

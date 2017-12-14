@@ -43,14 +43,14 @@ class Post extends React.Component {
         <Link className="editPost" to={`/posts/:${post.id}`}>
           Edit post
         </Link>
-        <p>Comments: {this.props.postComments}</p>
+        <p>Comments: {post.commentCount}</p>
       </div>
     );
   }
 }
 function mapStateToProps(state) {
     const props = Object.assign({}, state, {
-        postComments: state.postComments
+        comments: state.comments
     })
     return props;
 }
@@ -64,7 +64,6 @@ function mapDispatchToProps(dispatch) {
       dispatch(downVotePostAsync(id));
     },
     getComments: id => {
-        console.log('Is this dispatching?')
         dispatch(getPostCommentsAsync(id));
     }
   };
