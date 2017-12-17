@@ -5,6 +5,7 @@ import getPostsAsync from "../actions/getPosts";
 import getCategoriesAsync from "../actions/getCategories";
 import createPostAsync from "../actions/createPost";
 import orderPostsAsync from "../actions/orderPosts";
+import editPostAsync from "../actions/editPost";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history, withRouter } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
@@ -12,6 +13,7 @@ import PostsList from "./PostsList";
 import PostsOrderChanger from "./PostsOrderChanger";
 import PostForm from "./PostForm";
 import Post from "./Post";
+import EditPostForm from "./EditPostForm";
 
 class App extends Component {
 
@@ -25,12 +27,20 @@ class App extends Component {
             postOrderBy: ""
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.createPostHandler = this.createPostHandler.bind(this);
+        this.editPostHandler = this.editPostHandler.bind(this);
     }
 
-    handleSubmit() {
+    createPostHandler() {
         let postData = this.state;
         this.props.createPost(postData);
+    }
+
+    editPostHandler(id) {
+        let title = this.state.title;
+        let body = this.state.body;
+        let postData = { title, body};
+        this.props.editPost(id, postData);
     }
 
     handleInputChange(event) {
@@ -71,15 +81,23 @@ class App extends Component {
                 />
                 ))}
                 <Route exact path="/posts" render={() => (
-                    <PostForm type="Create" onInputChange={this.handleInputChange} onSubmitClick={this.handleSubmit}/>
+                    <PostForm type="Create" onInputChange={this.handleInputChange} onSubmitClick={this.createPostHandler}/>
                 )}/>
                 {posts.map(post => (
-                    <Route key={post.id}
-                        exact
-                        path={`/${post.category}/${post.id}`}
-                        render={() => (
-                            <Post post={post} displayComments={true}/>
-                        )}/>
+                    <div key={post.id}>
+                        <Route 
+                            exact
+                            path={`/${post.category}/${post.id}`}
+                            render={() => (
+                                <Post post={post} displayComments={true}/>
+                            )}/>
+                        <Route 
+                            exact
+                            path={`/posts/${post.id}`}
+                            render={() => (
+                                <EditPostForm type="Edit" onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post.id)}/>
+                            )}/>
+                    </div>
                 ))}
             </div>
     );
@@ -108,6 +126,9 @@ function mapDispatchToProps(dispatch) {
     },
     orderPosts: (orderPostsBy) => {
         dispatch(orderPostsAsync(orderPostsBy));
+    },
+    editPost: (id, values) => {
+        dispatch(editPostAsync(id, values));
     }
   };
 }

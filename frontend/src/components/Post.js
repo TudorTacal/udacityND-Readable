@@ -36,11 +36,11 @@ class Post extends React.Component {
         >
           -
         </button>
-        <Link className="addPost" to="/posts">
-          Add post
-        </Link>
-        <Link className="editPost" to={`/posts/:${post.id}`}>
+        <Link className="editPost" to={`/posts/${post.id}`}>
           Edit post
+        </Link>
+        <Link className="deletePost" to="/posts">
+          Delete post
         </Link>
         <p>{post.commentCount} comments</p>
         {this.props.displayComments && this.props.comments.map(comment => (
