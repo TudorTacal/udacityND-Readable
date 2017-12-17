@@ -69,6 +69,9 @@ class App extends Component {
                         <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                     </div>
                 )}/>
+                <Link className="addPost" to="/posts">
+                     Add post
+                </Link>
                 {categories.map(category => (
                     <Route exact key={category.name}
                         path={`/${category.path}`}

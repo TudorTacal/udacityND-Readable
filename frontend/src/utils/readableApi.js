@@ -12,3 +12,4 @@ export const fetchPostPost = (postData) => fetch('/posts', { method: 'POST',  he
 export const fetchPostVote = (id, option) => fetch(`/posts/${id}`, { method: 'POST', headers, body: JSON.stringify(option)});
 export const fetchPostComments = (id) => fetch(`/posts/${id}/comments`, { headers});
 export const fetchPostUpdate = (id, postData) => fetch(`/posts/${id}`, {method: 'PUT', headers, body: JSON.stringify(postData)});
+export const fetchPostDelete = (id) => fetch(`/posts/${id}`, {method: 'DELETE', headers});

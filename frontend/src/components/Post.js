@@ -3,6 +3,7 @@ import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Comment from "./Comment";
 import upVotePostAsync from "../actions/upVotePost";
+import deletePostAsync from "../actions/deletePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
 
@@ -39,9 +40,9 @@ class Post extends React.Component {
         <Link className="editPost" to={`/posts/${post.id}`}>
           Edit post
         </Link>
-        <Link className="deletePost" to="/posts">
+        <button className="deletePost" onClick={() => this.props.deletePost(post.id)}>
           Delete post
-        </Link>
+        </button>
         <p>{post.commentCount} comments</p>
         {this.props.displayComments && this.props.comments.map(comment => (
             <div key={comment.id} className="comments"><Comment comment={comment} /></div>
@@ -67,6 +68,9 @@ function mapDispatchToProps(dispatch) {
     },
     getComments: id => {
         dispatch(getPostCommentsAsync(id));
+    },
+    deletePost: (id) => {
+        dispatch(deletePostAsync(id));
     }
   };
 }

@@ -12,7 +12,7 @@ class PostsList extends React.Component {
           Posts:
           {this.props.posts.map(post => (
             <li key={post.id}>
-              <Post post={post} onClickUpVote={this.props.upVotePost} onClickDownVote={this.props.downVotePost}/>
+              <Post post={post} />
               <Link className="addPost" to="/posts">
                  Add post
               </Link>

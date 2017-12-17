@@ -4,6 +4,7 @@ import { UP_VOTE_POST } from '../actions/upVotePost';
 import { DOWN_VOTE_POST } from '../actions/downVotePost';
 import { GET_POST_COMMENTS } from '../actions/getPostComments';
 import { EDIT_POST } from '../actions/editPost';
+import { DELETE_POST } from '../actions/deletePost';
 
 let initialState = {
     posts: [],
@@ -32,11 +33,16 @@ function posts(state = initialState, action) {
     }
     case EDIT_POST: {
         let posts = state.posts.map(post => {
-            if (post.id === action.post.id) 
-                post.title = action.post.title;
-                post.body = action.post.body;
-            return post;
-        });
+            if(post.id === action.post.id) 
+                post = action.post
+            return post;})
+        return Object.assign({}, state, { posts });
+    }
+    case DELETE_POST: {
+    console.log(action.post);        
+        let posts = state.posts.
+                    map(post => post.id === action.post.id ? post = action.post : post).
+                    filter(post => post.deleted === false);
         return Object.assign({}, state, { posts });
     }
     default:
