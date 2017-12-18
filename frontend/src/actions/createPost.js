@@ -10,7 +10,6 @@ function createPost(postData) {
 }
 
 function createPostAsync(postData) {
-    console.log(postData);
     return dispatch => {
         let post = Object.assign({}, postData, {id: uuidv4(), timestamp: Date.now() })
         fetchPostPost(post).then(res => res.json()).then(data =>  dispatch(createPost(data)) );

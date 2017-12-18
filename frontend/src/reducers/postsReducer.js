@@ -5,6 +5,7 @@ import { DOWN_VOTE_POST } from '../actions/downVotePost';
 import { GET_POST_COMMENTS } from '../actions/getPostComments';
 import { EDIT_POST } from '../actions/editPost';
 import { DELETE_POST } from '../actions/deletePost';
+import { CREATE_COMMENT } from '../actions/createComment';
 
 let initialState = {
     posts: [],

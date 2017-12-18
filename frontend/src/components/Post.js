@@ -6,16 +6,34 @@ import upVotePostAsync from "../actions/upVotePost";
 import deletePostAsync from "../actions/deletePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
+import createCommentAsync from "../actions/createComment";
 import Modal from "react-modal";
 
 class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {       
+            author: "",
+            body: "",
             commentModalOpen: false
         };
         this.openCommentModal = this.openCommentModal.bind(this);
         this.closeCommentModal = this.closeCommentModal.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(parentId) {
+        const values = this.state;
+        delete values.commentModalOpen;
+        this.props.createComment(parentId, values);    
+        this.props.getComments(parentId);
+    }
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        return this.setState({[name]: value});
     }
     openCommentModal() {
         return this.setState({commentModalOpen: true});
@@ -69,13 +87,14 @@ class Post extends React.Component {
             >
              <form onSubmit={(event) => event.preventDefault() }>
              Add comment
-                <textarea placeholder="Body" name="body" />
+                <textarea placeholder="Body" name="body" onChange={this.handleInputChange}/>
                 <input
                     type="text"
                     placeholder="Author"
                     name="author"
+                    onChange={this.handleInputChange}
                 />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" onClick={(parentId) => this.handleSubmit(post.id)} />
             </form>
         </Modal>
       </div>
@@ -102,6 +121,9 @@ function mapDispatchToProps(dispatch) {
     },
     deletePost: (id) => {
         dispatch(deletePostAsync(id));
+    },
+    createComment: (parentId, values) => {
+        dispatch(createCommentAsync(parentId, values))
     }
   };
 }
