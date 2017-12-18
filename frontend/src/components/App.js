@@ -14,6 +14,8 @@ import PostsOrderChanger from "./PostsOrderChanger";
 import PostForm from "./PostForm";
 import Post from "./Post";
 import EditPostForm from "./EditPostForm";
+import Modal from "react-modal";
+Modal.setAppElement("body");
 
 class App extends Component {
 

@@ -6,8 +6,23 @@ import upVotePostAsync from "../actions/upVotePost";
 import deletePostAsync from "../actions/deletePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
+import Modal from "react-modal";
 
 class Post extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {       
+            commentModalOpen: false
+        };
+        this.openCommentModal = this.openCommentModal.bind(this);
+        this.closeCommentModal = this.closeCommentModal.bind(this);
+    }
+    openCommentModal() {
+        return this.setState({commentModalOpen: true});
+    }
+    closeCommentModal() {
+        return this.setState({commentModalOpen: false});
+    }
     componentWillMount() {
         return this.props.getComments(this.props.post.id);
     }
@@ -47,6 +62,22 @@ class Post extends React.Component {
         {this.props.displayComments && this.props.comments.map(comment => (
             <div key={comment.id} className="comments"><Comment comment={comment} /></div>
         ))}
+        <button onClick={() => this.openCommentModal()} >Add Comment</button>
+        <Modal 
+            isOpen={this.state.commentModalOpen}
+            onRequestClose={this.closeCommentModal}
+            >
+             <form onSubmit={(event) => event.preventDefault() }>
+             Add comment
+                <textarea placeholder="Body" name="body" />
+                <input
+                    type="text"
+                    placeholder="Author"
+                    name="author"
+                />
+                <input type="submit" value="Submit" />
+            </form>
+        </Modal>
       </div>
     );
   }
