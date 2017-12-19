@@ -6,6 +6,7 @@ import getCategoriesAsync from "../actions/getCategories";
 import createPostAsync from "../actions/createPost";
 import orderPostsAsync from "../actions/orderPosts";
 import editPostAsync from "../actions/editPost";
+import editCommentAsync from "../actions/editComment";
 import { fetchPosts } from "../utils/readableApi";
 import { Route, Router, Link, history, withRouter } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
@@ -38,6 +39,12 @@ class App extends Component {
         this.props.createPost(postData);
     }
 
+    editCommentHandler(id) {
+        let timestamp = Date.now();
+        let body = this.state.body;
+        let commentData = { timestamp, body };
+        this.props.editComment(id, commentData);    
+    }
     editPostHandler(id) {
         let title = this.state.title;
         let body = this.state.body;
@@ -104,6 +111,19 @@ class App extends Component {
                             )}/>
                     </div>
                 ))}
+                {this.props.comments.map(comment => (
+                     <Route key={comment.id}
+                        exact
+                        path={`/comments/${comment.id}`}
+                         render={() => (
+                            <form onSubmit={(event) => event.preventDefault() }>
+                                Edit comment
+                               <textarea placeholder="Body" name="body" onChange={this.handleInputChange}/>
+                               <input type="submit" value="Submit" onClick={() => this.editCommentHandler(comment.id)} />
+                           </form>
+                     )}/>
+                ))}
+
             </div>
     );
   }
@@ -113,7 +133,8 @@ function mapStateToProps(state) {
   const props = Object.assign({}, state, {
     orderPostsBy: state.orderPostsBy,
     posts: state.posts.posts,
-    categories: state.categories.categories
+    categories: state.categories.categories,
+    comments: state.posts.comments
   });
   return props;
 }
@@ -134,6 +155,9 @@ function mapDispatchToProps(dispatch) {
     },
     editPost: (id, values) => {
         dispatch(editPostAsync(id, values));
+    },
+    editComment: (id, values) => {
+        dispatch(editCommentAsync(id, values));
     }
   };
 }

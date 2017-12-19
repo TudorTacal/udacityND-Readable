@@ -27,21 +27,19 @@ class Comment extends React.Component {
         >
           -
         </button>
-        <Link className="addComment" to="/comments">
-          Add comment
-        </Link>
-        <Link className="editComment" to={`/comments/:${comment.id}`}>
+        <Link className="editComment" to={`/comments/${comment.id}`}>
           Edit comment
         </Link>
+        <button className="deleteComment" onClick={() => console.log('delete')}>
+          Delete comment
+        </button>
+
       </div>
     );
   }
 }
 function mapStateToProps(state) {
     const props = {};
-    // const props = Object.assign({}, state, {
-    //     comments: state.comments.comments
-    // })
     return props;
 }
 

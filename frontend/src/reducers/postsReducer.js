@@ -6,6 +6,7 @@ import { GET_POST_COMMENTS } from '../actions/getPostComments';
 import { EDIT_POST } from '../actions/editPost';
 import { DELETE_POST } from '../actions/deletePost';
 import { CREATE_COMMENT } from '../actions/createComment';
+import { EDIT_COMMENT } from '../actions/editComment';
 
 let initialState = {
     posts: [],
@@ -38,6 +39,13 @@ function posts(state = initialState, action) {
                 post = action.post
             return post;})
         return Object.assign({}, state, { posts });
+    }
+    case EDIT_COMMENT: {
+        let comments = state.comments.map(comment => {
+            if(comment.id === action.comment.id) 
+                comment = action.comment
+            return comment;})
+        return Object.assign({}, state, { comments });
     }
     case DELETE_POST: {
     console.log(action.post);        
