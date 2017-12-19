@@ -7,6 +7,7 @@ import { EDIT_POST } from '../actions/editPost';
 import { DELETE_POST } from '../actions/deletePost';
 import { CREATE_COMMENT } from '../actions/createComment';
 import { EDIT_COMMENT } from '../actions/editComment';
+import { CREATE_POST } from '../actions/createPost';
 
 let initialState = {
     posts: [],
@@ -33,6 +34,16 @@ function posts(state = initialState, action) {
     case GET_POST_COMMENTS: {
         return Object.assign({}, state, {comments: action.comments})
     }
+    case CREATE_POST: {
+        let posts = state.posts.map(post => post);
+        posts.push(action.post)
+        return Object.assign({}, state, { posts })  
+    }
+    case CREATE_COMMENT: {
+        let comments = state.comments.map(comment => comment);
+        comments.push(action.comment);
+        return Object.assign({}, state, { comments })  
+    }
     case EDIT_POST: {
         let posts = state.posts.map(post => {
             if(post.id === action.post.id) 
@@ -48,7 +59,6 @@ function posts(state = initialState, action) {
         return Object.assign({}, state, { comments });
     }
     case DELETE_POST: {
-    console.log(action.post);        
         let posts = state.posts.
                     map(post => post.id === action.post.id ? post = action.post : post).
                     filter(post => post.deleted === false);

@@ -5,7 +5,7 @@ export const CREATE_POST = "CREATE_POST";
 function createPost(postData) {
     return {
         type: CREATE_POST,
-        postData
+        post: postData
     }
 }
 

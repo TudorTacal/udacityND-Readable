@@ -27,7 +27,6 @@ class Post extends React.Component {
         const values = this.state;
         delete values.commentModalOpen;
         this.props.createComment(parentId, values);    
-        this.props.getComments(parentId);
     }
     handleInputChange(event) {
         const target = event.target;
