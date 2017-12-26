@@ -9,6 +9,8 @@ import { CREATE_COMMENT } from '../actions/createComment';
 import { EDIT_COMMENT } from '../actions/editComment';
 import { CREATE_POST } from '../actions/createPost';
 import { DELETE_COMMENT } from '../actions/deleteComment';
+import { UP_VOTE_COMMENT } from '../actions/upVoteComment';
+import { DOWN_VOTE_COMMENT } from '../actions/downVoteComment';
 
 let initialState = {
     posts: [],
@@ -70,6 +72,14 @@ function posts(state = initialState, action) {
             comment.id === action.comment.id ? comment = action.comment : comment).
             filter(comment => comment.deleted === false)
         return Object.assign({}, state, { comments });  
+    }
+    case UP_VOTE_COMMENT: {
+        let comments = state.comments.map(comment => comment.id === action.comment.id ? action.comment : comment)
+        return Object.assign({}, state, { comments });
+    }
+    case DOWN_VOTE_COMMENT: {
+        let comments = state.comments.map(comment => comment.id === action.comment.id ? action.comment : comment)
+        return Object.assign({}, state, { comments });
     }
     default:
       return state;

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import deleteCommentAsync from "../actions/deleteComment";
-// import upVoteCommentAsync from "../actions/upVoteComment";
-// import downVoteCommentAsync from "../actions/downVoteComment";
+import upVoteCommentAsync from "../actions/upVoteComment";
+import downVoteCommentAsync from "../actions/downVoteComment";
 
 class Comment extends React.Component {
   render() {
@@ -47,13 +47,13 @@ function mapDispatchToProps(dispatch) {
   return {
       deleteComment: id => {
           dispatch(deleteCommentAsync(id));
-      }
-    // upVoteComment: id => {
-    //   dispatch(upVoteCommentAsync(id));
-    // },
-    // downVoteComment: id => {
-    //   dispatch(downVoteCommentAsync(id));
-    // }
+      },
+    upVoteComment: id => {
+      dispatch(upVoteCommentAsync(id));
+    },
+    downVoteComment: id => {
+      dispatch(downVoteCommentAsync(id));
+    }
   }
 }
 

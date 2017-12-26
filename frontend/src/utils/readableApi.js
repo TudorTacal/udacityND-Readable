@@ -16,3 +16,4 @@ export const fetchPostDelete = (id) => fetch(`/posts/${id}`, {method: 'DELETE', 
 export const fetchCommentCreate = (commentData) => fetch('/comments',  { method: 'POST', headers, body: JSON.stringify(commentData)});
 export const fetchCommentUpdate = (id, commentData) => fetch(`/comments/${id}`, {method: 'PUT', headers, body: JSON.stringify(commentData)});
 export const fetchCommentDelete = (id) => fetch(`/comments/${id}`, { method: 'DELETE', headers });
+export const fetchCommentVote = (id, option) => fetch(`/comments/${id}`, { method: 'POST', headers, body: JSON.stringify(option)});
