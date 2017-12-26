@@ -8,6 +8,7 @@ import { DELETE_POST } from '../actions/deletePost';
 import { CREATE_COMMENT } from '../actions/createComment';
 import { EDIT_COMMENT } from '../actions/editComment';
 import { CREATE_POST } from '../actions/createPost';
+import { DELETE_COMMENT } from '../actions/deleteComment';
 
 let initialState = {
     posts: [],
@@ -63,6 +64,12 @@ function posts(state = initialState, action) {
                     map(post => post.id === action.post.id ? post = action.post : post).
                     filter(post => post.deleted === false);
         return Object.assign({}, state, { posts });
+    }
+    case DELETE_COMMENT: {
+        let comments = state.comments.map(comment => 
+            comment.id === action.comment.id ? comment = action.comment : comment).
+            filter(comment => comment.deleted === false)
+        return Object.assign({}, state, { comments });  
     }
     default:
       return state;

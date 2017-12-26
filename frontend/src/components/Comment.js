@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import deleteCommentAsync from "../actions/deleteComment";
 // import upVoteCommentAsync from "../actions/upVoteComment";
 // import downVoteCommentAsync from "../actions/downVoteComment";
 
@@ -30,10 +31,9 @@ class Comment extends React.Component {
         <Link className="editComment" to={`/comments/${comment.id}`}>
           Edit comment
         </Link>
-        <button className="deleteComment" onClick={() => console.log('delete')}>
+        <button className="deleteComment" onClick={() => this.props.deleteComment(comment.id)}>
           Delete comment
         </button>
-
       </div>
     );
   }
@@ -45,6 +45,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+      deleteComment: id => {
+          dispatch(deleteCommentAsync(id));
+      }
     // upVoteComment: id => {
     //   dispatch(upVoteCommentAsync(id));
     // },
