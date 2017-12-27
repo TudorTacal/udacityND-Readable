@@ -45,7 +45,12 @@ function posts(state = initialState, action) {
     case CREATE_COMMENT: {
         let comments = state.comments.map(comment => comment);
         comments.push(action.comment);
-        return Object.assign({}, state, { comments })  
+        let posts = state.posts.map(post => post).map(post => {
+            if (post.id === action.comment.parentId)
+             post.commentCount ++;
+            return post;
+        });
+        return Object.assign({}, state, { comments, posts});
     }
     case EDIT_POST: {
         let posts = state.posts.map(post => {
