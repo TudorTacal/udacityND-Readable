@@ -112,7 +112,7 @@ class App extends Component {
                             exact
                             path={`/posts/${post.id}`}
                             render={() => (
-                                <EditPostForm type="Edit" onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post.id)}/>
+                                <EditPostForm type="Edit" post={post} onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post.id)}/>
                             )}/>
                     </div>
                 ))}
