@@ -123,7 +123,7 @@ class App extends Component {
                          render={() => (
                             <form onSubmit={(event) => event.preventDefault() }>
                                 Edit comment
-                               <textarea placeholder="Body" name="body" onChange={this.handleInputChange}/>
+                               <textarea placeholder="Body" name="body" onChange={this.handleInputChange} defaultValue={comment.body}/>
                                <input type="submit" value="Submit" onClick={() => this.editCommentHandler(comment.id)} />
                            </form>
                      )}/>
