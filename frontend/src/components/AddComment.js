@@ -7,13 +7,25 @@ Modal.setAppElement("body");
 class AddComment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      commentModalOpen: false
+    this.state = {           
+         body: "",
+         author: "",
+         commentModalOpen: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openCommentModal = this.openCommentModal.bind(this);
     this.closeCommentModal = this.closeCommentModal.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);    
   }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+        [name]: value
+      });
+}
   handleSubmit(parentId) {
     const values = this.state;
     delete values.commentModalOpen;
@@ -49,7 +61,7 @@ class AddComment extends React.Component {
             <input
               type="submit"
               value="Submit"
-              onClick={parentId => this.handleSubmit(this.props.post.id)}
+              onClick={parentId => {console.log(this.props.post.id); return this.handleSubmit(this.props.post.id)}}
             />
           </form>
         </Modal>

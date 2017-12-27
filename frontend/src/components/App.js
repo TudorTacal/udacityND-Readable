@@ -108,7 +108,7 @@ class App extends Component {
                             render={() => (
                                 <div>
                                     <Post post={post} displayComments={true}/>
-                                    <AddComment post={post}/>
+                                    <AddComment post={post} onInputChange={this.handleInputChange}/>
                                 </div>
                             )}/>
                         <Route 
