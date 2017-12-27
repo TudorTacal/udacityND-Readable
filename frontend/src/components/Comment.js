@@ -5,7 +5,9 @@ import deleteCommentAsync from "../actions/deleteComment";
 import upVoteCommentAsync from "../actions/upVoteComment";
 import downVoteCommentAsync from "../actions/downVoteComment";
 
+
 class Comment extends React.Component {
+    
   render() {
     const { comment } = this.props;
     return (
@@ -33,7 +35,7 @@ class Comment extends React.Component {
         </Link>
         <button className="deleteComment" onClick={() => this.props.deleteComment(comment.id)}>
           Delete comment
-        </button>
+        </button>       
       </div>
     );
   }

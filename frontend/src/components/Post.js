@@ -6,40 +6,24 @@ import upVotePostAsync from "../actions/upVotePost";
 import deletePostAsync from "../actions/deletePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
-import createCommentAsync from "../actions/createComment";
-import Modal from "react-modal";
 
 class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {       
             author: "",
-            body: "",
-            commentModalOpen: false
+            body: ""
         };
-        this.openCommentModal = this.openCommentModal.bind(this);
-        this.closeCommentModal = this.closeCommentModal.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(parentId) {
-        const values = this.state;
-        delete values.commentModalOpen;
-        this.props.createComment(parentId, values);    
-    }
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
         return this.setState({[name]: value});
     }
-    openCommentModal() {
-        return this.setState({commentModalOpen: true});
-    }
-    closeCommentModal() {
-        return this.setState({commentModalOpen: false});
-    }
+
     componentWillMount() {
         return this.props.getComments(this.props.post.id);
     }
@@ -78,25 +62,8 @@ class Post extends React.Component {
         {/* TODO: fix comment count updates without refreshing the page */}
         <p>{post.commentCount} comments</p>
         {this.props.displayComments && this.props.comments.map(comment => (
-            <div key={comment.id} className="comments"><Comment comment={comment} /></div>
+            <div key={comment.id} className="comments"><Comment comment={comment} post={post} /></div>
         ))}
-        <button onClick={() => this.openCommentModal()} >Add Comment</button>
-        <Modal 
-            isOpen={this.state.commentModalOpen}
-            onRequestClose={this.closeCommentModal}
-            >
-             <form onSubmit={(event) => event.preventDefault() }>
-             Add comment
-                <textarea placeholder="Body" name="body" onChange={this.handleInputChange}/>
-                <input
-                    type="text"
-                    placeholder="Author"
-                    name="author"
-                    onChange={this.handleInputChange}
-                />
-                <input type="submit" value="Submit" onClick={(parentId) => this.handleSubmit(post.id)} />
-            </form>
-        </Modal>
       </div>
     );
   }
@@ -121,9 +88,6 @@ function mapDispatchToProps(dispatch) {
     },
     deletePost: (id) => {
         dispatch(deletePostAsync(id));
-    },
-    createComment: (parentId, values) => {
-        dispatch(createCommentAsync(parentId, values))
     }
   };
 }

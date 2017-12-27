@@ -16,6 +16,7 @@ import PostForm from "./PostForm";
 import Post from "./Post";
 import EditPostForm from "./EditPostForm";
 import Modal from "react-modal";
+import AddComment from './AddComment';
 Modal.setAppElement("body");
 
 class App extends Component {
@@ -46,7 +47,6 @@ class App extends Component {
         this.props.editComment(id, commentData);    
     }
     editPostHandler(id) {
-        // TODO: when editing, existing data should be populated in the form
         let title = this.state.title;
         let body = this.state.body;
         let postData = { title, body};
@@ -106,7 +106,10 @@ class App extends Component {
                             exact
                             path={`/${post.category}/${post.id}`}
                             render={() => (
-                                <Post post={post} displayComments={true}/>
+                                <div>
+                                    <Post post={post} displayComments={true}/>
+                                    <AddComment post={post}/>
+                                </div>
                             )}/>
                         <Route 
                             exact
