@@ -46,6 +46,7 @@ class App extends Component {
         this.props.editComment(id, commentData);    
     }
     editPostHandler(id) {
+        // TODO: when editing, existing data should be populated in the form
         let title = this.state.title;
         let body = this.state.body;
         let postData = { title, body};
@@ -76,11 +77,12 @@ class App extends Component {
                         <CategoriesList categories={categories}/>
                         <PostsList posts={posts} />
                         <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+                        <Link className="addPost" to="/posts">
+                            Add post
+                        </Link>       
                     </div>
                 )}/>
-                <Link className="addPost" to="/posts">
-                     Add post
-                </Link>
+
                 {categories.map(category => (
                     <Route exact key={category.name}
                         path={`/${category.path}`}
@@ -88,6 +90,9 @@ class App extends Component {
                         <div>
                             <PostsList posts={posts.filter(post => post.category === category.name)}/>
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+                            <Link className="addPost" to="/posts">
+                                Add post
+                            </Link>
                         </div>
                     )}
                 />

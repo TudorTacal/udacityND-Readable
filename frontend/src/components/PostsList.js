@@ -13,9 +13,6 @@ class PostsList extends React.Component {
           {this.props.posts.map(post => (
             <li key={post.id}>
               <Post post={post} />
-              <Link className="addPost" to="/posts">
-                 Add post
-              </Link>
               <br />
               <br />
             </li>
