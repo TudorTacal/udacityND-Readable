@@ -75,7 +75,12 @@ function posts(state = initialState, action) {
     case DELETE_COMMENT: {
         let comments = state.comments.map(comment => 
             comment.id === action.comment.id ? comment = action.comment : comment).
-            filter(comment => comment.deleted === false)
+            filter(comment => comment.deleted === false);
+        let posts = state.posts.map(post => post).map(post => {
+            if (post.id === action.comment.parentId)
+                post.commentCount --;
+            return post;
+        });
         return Object.assign({}, state, { comments });  
     }
     case UP_VOTE_COMMENT: {
