@@ -88,6 +88,8 @@ class App extends Component {
                         path={`/${category.path}`}
                         render={(history) => (
                         <div>
+                                                    <CategoriesList categories={categories}/>
+
                             <PostsList posts={posts.filter(post => post.category === category.name)}/>
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                             <Link className="addPost" to="/posts">

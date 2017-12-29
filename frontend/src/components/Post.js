@@ -59,7 +59,6 @@ class Post extends React.Component {
         <button className="deletePost" onClick={() => this.props.deletePost(post.id)}>
           Delete post
         </button>
-        {/* TODO: fix comment count updates without refreshing the page */}
         <p>{post.commentCount} comments</p>
         {this.props.displayComments && this.props.comments.map(comment => (
             <div key={comment.id} className="comments"><Comment comment={comment} post={post} /></div>
