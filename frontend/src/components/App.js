@@ -92,7 +92,7 @@ class App extends Component {
 
                             <PostsList posts={posts.filter(post => post.category === category.name)}/>
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
-                            <Link className="addPost" to="/posts">
+                            <Link className="btn" to="/posts">
                                 Add post
                             </Link>
                         </div>
