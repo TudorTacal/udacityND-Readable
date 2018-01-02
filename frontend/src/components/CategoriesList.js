@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 function CategoriesList(props) {
     return (
       <div className="categories">
-        Categories:
         {props.categories.map(category => (
           <div key={category.path} className="category">
-            <Link key={category.name} to={`/${category.path}`}>
+            <Link key={category.name} to={`/${category.path}`} className="btn btn-outline-secondary">
               {category.name}
             </Link>
           </div>

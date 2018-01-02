@@ -68,10 +68,12 @@ class App extends Component {
     this.props.getCategories();
   }
   render() {
+    
+
     let posts = this.props.posts;
     let categories = this.props.categories;
     return (
-            <div className="App">
+            <div className="App container" >
                 <Route exact path="/" render={(history) => (
                     <div>
                         <CategoriesList categories={categories}/>
@@ -82,14 +84,13 @@ class App extends Component {
                         </Link>       
                     </div>
                 )}/>
-
+                
                 {categories.map(category => (
                     <Route exact key={category.name}
                         path={`/${category.path}`}
                         render={(history) => (
                         <div>
-                                                    <CategoriesList categories={categories}/>
-
+                            <CategoriesList categories={categories}/>
                             <PostsList posts={posts.filter(post => post.category === category.name)}/>
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                             <Link className="btn" to="/posts">
