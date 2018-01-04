@@ -74,6 +74,7 @@ class App extends Component {
     let categories = this.props.categories;
     return (
             <div className="App container" >
+                <Link className="title" to="/">Readable</Link>
                 <Route exact path="/" render={(history) => (
                     <div>
                         <CategoriesList categories={categories}/>
