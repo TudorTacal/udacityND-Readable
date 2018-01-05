@@ -9,6 +9,7 @@ import getPostCommentsAsync from "../actions/getPostComments";
 import FaArrowUp from "react-icons/lib/fa/arrow-up";
 import FaArrowDown from "react-icons/lib/fa/arrow-down";
 import FaTrashO from "react-icons/lib/fa/trash-o";
+import FaPencil from "react-icons/lib/fa/pencil";
 
 
 class Post extends React.Component {
@@ -44,18 +45,23 @@ class Post extends React.Component {
           {post.title}
         </Link>
         <h6>{post.body}</h6>
-        <p className="small">submitted by {post.author} on {new Date(post.timestamp).toGMTString()} to {post.category}</p>
-       
-        <Link className="editPost" to={`/posts/${post.id}`}>
-          Edit post
-        </Link>
-        <button className="deletePost" onClick={() => this.props.deletePost(post.id)}>
-            <FaTrashO className="faTrashO" size={12}/>
-        </button>
-        <p>{post.commentCount} comments</p>
+        <p className="postAuthorInfo">submitted by {post.author} on {new Date(post.timestamp).toGMTString()} to {post.category}</p>
+        <div className="postControlBox small">
+            <p className="editPost">
+                <Link  to={`/posts/${post.id}`}>
+                    <FaPencil className="faPencil" size={12}/>
+                </Link>
+            </p>
+            <p>
+                <button className="deletePost" onClick={() => this.props.deletePost(post.id)}>
+                    <FaTrashO className="faTrashO" size={12}/>
+                </button>
+            </p>
+            <p className="commentCount">{post.commentCount} comments</p>
+        </div>
         {this.props.displayComments && this.props.comments.map(comment => (
-            <div key={comment.id} className="comments"><Comment comment={comment} post={post} /></div>
-        ))}
+                <div key={comment.id} className="comments"><Comment comment={comment} post={post} /></div>
+            ))}
       </div>
     );
   }

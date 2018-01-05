@@ -1,5 +1,6 @@
 .categories {
     display: flex;    
+    margin-bottom: 10px;
 }
 
 .createPost {
@@ -44,10 +45,6 @@ a:hover {
     text-decoration: none;
 }
 
-.postView {
-    
-}
-
 .voteBox {
     text-align: center;
     float: left;
@@ -60,8 +57,33 @@ a:hover {
     cursor: pointer;
 }
 
-.faArrowUp, .faArrowDown, faTrashO {
+.faArrowUp, .faArrowDown, faTrashO, faPencil {
     color: #c6c6c6;
+}
+
+.postControlBox {
+    display: flex;
+    clear: right;
+    margin-left: 42px;  
+    height: 2em;
+}
+
+.commentCount {
+    padding-top: 2px;
+}
+
+.editPost {
+    padding-top: 1px;  
+}
+
+.postAuthorInfo {
+    font-size: small;
+    margin: 0;
+    margin-left: 42px;      
+}
+
+h6 {
+    margin-left: 42px;      
 }
 
 
