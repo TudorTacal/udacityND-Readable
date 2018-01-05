@@ -6,6 +6,10 @@ import upVotePostAsync from "../actions/upVotePost";
 import deletePostAsync from "../actions/deletePost";
 import downVotePostAsync from "../actions/downVotePost";
 import getPostCommentsAsync from "../actions/getPostComments";
+import FaArrowUp from "react-icons/lib/fa/arrow-up";
+import FaArrowDown from "react-icons/lib/fa/arrow-down";
+import FaTrashO from "react-icons/lib/fa/trash-o";
+
 
 class Post extends React.Component {
     constructor(props) {
@@ -31,33 +35,22 @@ class Post extends React.Component {
     const { post } = this.props;
     return (
       <div>
+        <div className="voteBox"> 
+            <button className="upVote" onClick={() => { return this.props.upVotePost(post.id);}}><FaArrowUp className="faArrowUp" size={12} /></button><br/>
+                <span className="voteScore">{post.voteScore}</span><br/>
+            <button className="downVote" onClick={() => { return this.props.downVotePost(post.id);}}><FaArrowDown className="faArrowDown" size={12}/></button><br/>
+        </div>
         <Link className="postView" to={`/${post.category}/${post.id}`}>
           {post.title}
         </Link>
-        <h4>{post.body}</h4>
-        <p>Author: {post.author}</p>
-        <p>Time: {new Date(post.timestamp).toGMTString()}</p>
-        <p>Category: {post.category}</p>
-        <p>Votes: {post.voteScore}</p>
-        <button
-          onClick={() => {
-            return this.props.upVotePost(post.id);
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            return this.props.downVotePost(post.id);
-          }}
-        >
-          -
-        </button>
+        <h6>{post.body}</h6>
+        <p className="small">submitted by {post.author} on {new Date(post.timestamp).toGMTString()} to {post.category}</p>
+       
         <Link className="editPost" to={`/posts/${post.id}`}>
           Edit post
         </Link>
         <button className="deletePost" onClick={() => this.props.deletePost(post.id)}>
-          Delete post
+            <FaTrashO className="faTrashO" size={12}/>
         </button>
         <p>{post.commentCount} comments</p>
         {this.props.displayComments && this.props.comments.map(comment => (

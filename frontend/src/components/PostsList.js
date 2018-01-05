@@ -9,12 +9,9 @@ class PostsList extends React.Component {
     return (
       <div className="posts">
         <ul>
-          Posts:
           {this.props.posts.map(post => (
-            <li key={post.id}>
+            <li className='post' key={post.id}>
               <Post post={post} />
-              <br />
-              <br />
             </li>
           ))}
         </ul>

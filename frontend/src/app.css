@@ -25,8 +25,15 @@ span {
 
 .posts ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
+.post {
+    border: solid 1px #f5f5f5;    
+    margin: 5px 0;
+    background-color: #FCFCFC;    
+}
 .title {
     font-family: 'Titillium Web', sans-serif;
     font-size: 30px;
@@ -36,3 +43,26 @@ span {
 a:hover {
     text-decoration: none;
 }
+
+.postView {
+    
+}
+
+.voteBox {
+    text-align: center;
+    float: left;
+    margin: 0 10px;
+}
+
+.upVote, .downVote, .deletePost {
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.faArrowUp, .faArrowDown, faTrashO {
+    color: #c6c6c6;
+}
+
+
+
