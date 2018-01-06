@@ -93,5 +93,16 @@ h6 {
     margin-bottom: 5px;
 }
 
+.sortBox {
+    background-color: #A9A9A9;
+    color: white;
+    border-radius: 3px;
+}
+
+.sortBoxOption {
+    background-color: #fff;
+    color: black;
+}
+
 
 
