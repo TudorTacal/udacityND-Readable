@@ -35,11 +35,21 @@ class App extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.createPostHandler = this.createPostHandler.bind(this);
         this.editPostHandler = this.editPostHandler.bind(this);
+        this.clearForm = this.clearForm.bind(this);
     }
 
     createPostHandler() {
         let postData = this.state;
         this.props.createPost(postData);
+        this.clearForm(postData);
+        console.log(this.state);
+    }
+
+    clearForm(data){
+        for(let property in data) {
+            if(data.hasOwnProperty(property))
+                this.setState({[property]: ""}, function (){console.log(this.state)})            
+        }
     }
 
     editCommentHandler(id) {
@@ -110,7 +120,7 @@ class App extends Component {
                 />
                 ))}
                 <Route exact path="/posts" render={() => (
-                    <PostForm type="create" onInputChange={this.handleInputChange} onSubmitClick={this.createPostHandler}/>
+                    <PostForm type="create" onInputChange={this.handleInputChange} values={this.state} onSubmitClick={this.createPostHandler}/>
                 )}/>
                 {posts.map(post => (
                     <div key={post.id}>

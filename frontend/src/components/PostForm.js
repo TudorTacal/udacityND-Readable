@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 
 function PostForm(props) {
   return (
-
     <form className={`${props.type}Form`} onSubmit={event => event.preventDefault()}>
-        <Link style={{color: 'black'}}exact to="/">
+        <Link style={{color: 'black'}}to="/">
             <FaClose style={{float: "right"}} size={12}/>
         </Link>
         <div className="form-group">
-            <label for="title">Title</label>
+            <label htmlFor="title">Title</label>
             <input
                 className="form-control"
                 id="title"
@@ -18,14 +17,15 @@ function PostForm(props) {
                 placeholder="Enter title"
                 name="title"
                 onChange={props.onInputChange}
+                value={props.values.title}
             />
         </div>
         <div className="form-group">
-            <label for="body">Post body</label><br/>
-            <textarea placeholder="Enter post body" name="body" id="body" onChange={props.onInputChange} />
+            <label htmlFor="body">Post body</label><br/>
+            <textarea placeholder="Enter post body" name="body" id="body" value={props.values.body} onChange={props.onInputChange} />
          </div>
          <div className="form-group">
-            <label for="author">Author</label>
+            <label htmlFor="author">Author</label>
             <input
                 className="form-control"  
                 id="author"            
@@ -33,16 +33,18 @@ function PostForm(props) {
                 placeholder="Author"
                 name="author"
                 onChange={props.onInputChange}
+                value={props.values.author}
              />
          </div>
          <div className="form-group">
-            <label for="author">Category</label>
+            <label htmlFor="author">Category</label>
             <input
                 className="form-control"              
                 type="text"
                 placeholder="Enter a category: react, redux or udacity"
                 name="category"
                 onChange={props.onInputChange}
+                value={props.values.category}
             />
         </div>
       <button className="btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
