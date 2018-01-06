@@ -97,18 +97,20 @@ class App extends Component {
                         render={(history) => (
                         <div>
                             <CategoriesList categories={categories}/>
+                            <Link className="addPost" to="/posts">
+                                <button type="button" className="addPostButton btn btn-secondary btn-sm">
+                                    <span>Add post</span> 
+                                    <FaPlus size={12}/>
+                                </button>
+                            </Link> 
                             <PostsList posts={posts.filter(post => post.category === category.name)}/>
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
-                            <Link className="btn" to="/posts">
-                                Add post
-                                <FaPlus size={12}/>
-                            </Link>
                         </div>
                     )}
                 />
                 ))}
                 <Route exact path="/posts" render={() => (
-                    <PostForm type="Create" onInputChange={this.handleInputChange} onSubmitClick={this.createPostHandler}/>
+                    <PostForm type="create" onInputChange={this.handleInputChange} onSubmitClick={this.createPostHandler}/>
                 )}/>
                 {posts.map(post => (
                     <div key={post.id}>

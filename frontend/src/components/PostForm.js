@@ -1,29 +1,53 @@
 import React, { Compoenent } from "react";
+import FaClose from "react-icons/lib/fa/close";
+import { Link } from "react-router-dom";
 
 function PostForm(props) {
   return (
-    <form className={`${props.type}form`} onSubmit={event => event.preventDefault()}>
-      Add post
-      <input
-        type="text"
-        placeholder="Title"
-        name="title"
-        onChange={props.onInputChange}
-      />
-      <textarea placeholder="Body" name="body" onChange={props.onInputChange} />
-      <input
-        type="text"
-        placeholder="Author"
-        name="author"
-        onChange={props.onInputChange}
-      />
-      <input
-        type="text"
-        placeholder="Category: react, redux or udacity"
-        name="category"
-        onChange={props.onInputChange}
-      />
-      <input type="submit" value="Submit" onClick={props.onSubmitClick} />
+
+    <form className={`${props.type}Form`} onSubmit={event => event.preventDefault()}>
+        <Link style={{color: 'black'}}exact to="/">
+            <FaClose style={{float: "right"}} size={12}/>
+        </Link>
+        <div className="form-group">
+            <label for="title">Title</label>
+            <input
+                className="form-control"
+                id="title"
+                type="text"
+                placeholder="Enter title"
+                name="title"
+                onChange={props.onInputChange}
+            />
+        </div>
+        <div className="form-group">
+            <label for="body">Post body</label><br/>
+            <textarea placeholder="Enter post body" name="body" id="body" onChange={props.onInputChange} />
+         </div>
+         <div className="form-group">
+            <label for="author">Author</label>
+            <input
+                className="form-control"  
+                id="author"            
+                type="text"
+                placeholder="Author"
+                name="author"
+                onChange={props.onInputChange}
+             />
+         </div>
+         <div className="form-group">
+            <label for="author">Category</label>
+            <input
+                className="form-control"              
+                type="text"
+                placeholder="Enter a category: react, redux or udacity"
+                name="category"
+                onChange={props.onInputChange}
+            />
+        </div>
+      <button className="btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
+        Submit
+      </button>
     </form>
   );
 }
