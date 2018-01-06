@@ -17,6 +17,8 @@ import Post from "./Post";
 import EditPostForm from "./EditPostForm";
 import Modal from "react-modal";
 import AddComment from './AddComment';
+import FaPencil from "react-icons/lib/fa/pencil";
+import FaPlus from "react-icons/lib/fa/plus";
 Modal.setAppElement("body");
 
 class App extends Component {
@@ -78,11 +80,14 @@ class App extends Component {
                 <Route exact path="/" render={(history) => (
                     <div>
                         <CategoriesList categories={categories}/>
-                        <PostsList posts={posts} />
-                        <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                         <Link className="addPost" to="/posts">
-                            Add post
-                        </Link>       
+                            <button type="button" className="addPostButton btn btn-secondary btn-sm">
+                                <span>Add post</span> 
+                                <FaPlus size={12}/>
+                            </button>
+                        </Link> 
+                        <PostsList posts={posts} />
+                        <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>      
                     </div>
                 )}/>
                 
@@ -96,6 +101,7 @@ class App extends Component {
                             <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                             <Link className="btn" to="/posts">
                                 Add post
+                                <FaPlus size={12}/>
                             </Link>
                         </div>
                     )}

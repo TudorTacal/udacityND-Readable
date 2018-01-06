@@ -86,5 +86,12 @@ h6 {
     margin-left: 42px;      
 }
 
+.addPostButton {
+    background-color: #7CFC00;
+    border: 0;
+    opacity: 1;
+    margin-bottom: 5px;
+}
+
 
 
