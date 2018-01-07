@@ -107,8 +107,27 @@ h6 {
 .createForm {
     width: 50%;
     margin: 0 auto;
-
 }
 
+.editForm {
+    width: 30%;
+    margin: 0 auto;
+}
 
+.editTitleInput {
+    width: 100%;
+}
+
+.editBodyTextArea {
+    width: 100%;
+}
+
+.addCommentForm {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.addCommentInput {
+    width: 100%;
+}
 
