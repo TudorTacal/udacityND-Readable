@@ -35,16 +35,20 @@ class Post extends React.Component {
   render() {
     const { post } = this.props;
     return (
-      <div>
+      <div className="postContainer">
         <div className="voteBox"> 
-            <button className="upVote" onClick={() => { return this.props.upVotePost(post.id);}}><FaArrowUp className="faArrowUp" size={12} /></button><br/>
+            <button className="upVote" onClick={() => { return this.props.upVotePost(post.id);}}>
+                <FaArrowUp className="faArrowUp" size={12} />
+            </button><br/>
                 <span className="voteScore">{post.voteScore}</span><br/>
-            <button className="downVote" onClick={() => { return this.props.downVotePost(post.id);}}><FaArrowDown className="faArrowDown" size={12}/></button><br/>
+            <button className="downVote" onClick={() => { return this.props.downVotePost(post.id);}}>
+                <FaArrowDown className="faArrowDown" size={12}/>
+            </button><br/>
         </div>
         <Link className="postView" to={`/${post.category}/${post.id}`}>
           {post.title}
         </Link>
-        <h6>{post.body}</h6>
+        <h6 className="postBody">{post.body}</h6>
         <p className="postAuthorInfo">submitted by {post.author} on {new Date(post.timestamp).toGMTString()} to {post.category}</p>
         <div className="postControlBox small">
             <p className="editPost">
@@ -59,10 +63,12 @@ class Post extends React.Component {
             </p>
             <p className="commentCount">{post.commentCount} comments</p>
         </div>
+        <hr className="commentSeparator"/>
         {this.props.displayComments && this.props.comments.map(comment => (
                 <div key={comment.id} className="comments"><Comment comment={comment} post={post} /></div>
             ))}
       </div>
+      
     );
   }
 }

@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import createCommentAsync from "../actions/createComment";
 import { Link } from "react-router-dom";
 import FaClose from "react-icons/lib/fa/close";
+import FaPlus from "react-icons/lib/fa/plus";
 Modal.setAppElement("body");
 
 class AddComment extends React.Component {
@@ -42,7 +43,10 @@ class AddComment extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.openCommentModal()}>Add Comment</button>
+        <button className="addPostButton btn btn-secondary btn-sm" onClick={() => this.openCommentModal()}>
+            <span>Add Comment</span>
+            <FaPlus size={12}/>
+        </button>
         <Modal
             style={{
                      overlay: {
@@ -60,33 +64,31 @@ class AddComment extends React.Component {
           onRequestClose={this.closeCommentModal}
         >
           <form className="addCommentForm" onSubmit={event => event.preventDefault()}>
-          <Link style={{color: 'black'}}to="/">
-            <FaClose style={{float: "right"}} size={12}/>
-          </Link>
-          <div className="form-group">
-            <label htmlFor="editCommentBody">Comment</label><br/>
-            <textarea
-              placeholder="Enter comment"
-              className="addCommentInput"              
-              id="edithCommentBody"
-              name="body"
-              onChange={this.handleInputChange}
-            />
-            </div>
-            <div className="form-group">   
-                <label htmlFor="editCommentAuthor">Author</label><br/>     
-                <input
-                    className="addCommentInput"
-                    type="text"
-                    placeholder="Enter author"
-                    name="author"
-                    id="eidtCommentAuthor"
-                    onChange={this.handleInputChange}
+          <FaClose style={{float: "right"}} onClick={this.closeCommentModal} size={12}/>
+            <div className="form-group">
+                <label htmlFor="editCommentBody">Comment</label><br/>
+                <textarea
+                placeholder="Enter comment"
+                className="addCommentInput"              
+                id="edithCommentBody"
+                name="body"
+                onChange={this.handleInputChange}
                 />
-            </div>
-            <button className="btn btn-primary" to="/" type="submit" value="Submit" onClick={parentId => {this.handleSubmit(this.props.post.id); this.closeCommentModal()}} >
-                Submit
-            </button>
+                </div>
+                <div className="form-group">   
+                    <label htmlFor="editCommentAuthor">Author</label><br/>     
+                    <input
+                        className="addCommentInput"
+                        type="text"
+                        placeholder="Enter author"
+                        name="author"
+                        id="eidtCommentAuthor"
+                        onChange={this.handleInputChange}
+                    />
+                </div>
+                <button className="btn btn-primary" to="/" type="submit" value="Submit" onClick={parentId => {this.handleSubmit(this.props.post.id); this.closeCommentModal()}} >
+                    Submit
+                </button>
           </form>
         </Modal>
       </div>

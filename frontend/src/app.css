@@ -14,9 +14,9 @@
 }
 
 .comment {
-    border: 1px solid #f2f2f2;
     margin-bottom: 2px;
     padding: 3px;
+    font-style: italic;
 }
 
 span {
@@ -51,7 +51,7 @@ a:hover {
     margin: 0 10px;
 }
 
-.upVote, .downVote, .deletePost {
+.upVote, .downVote, .deletePost, .deleteComment {
     border: 0;
     background: none;
     cursor: pointer;
@@ -62,6 +62,13 @@ a:hover {
 }
 
 .postControlBox {
+    display: flex;
+    clear: right;
+    margin-left: 42px;  
+    height: 2em;
+}
+
+.commentControlBox {
     display: flex;
     clear: right;
     margin-left: 42px;  
@@ -131,3 +138,46 @@ h6 {
     width: 100%;
 }
 
+.postPage .postView {
+    font-size: 32px;
+}
+
+.postPage .postBodyPostPage {
+    padding: 20px;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.postPage .postContainer {
+    padding: 20px;
+}
+
+.faTrashOComment {
+    margin-bottom: 4.5px;
+}
+
+.postPage .postControlBox {
+    display: flex;
+    clear: right;
+    margin-left: 62px;  
+    font-size: 16px;
+}
+
+.postPage .postAuthorInfo {
+    margin-bottom: -2px;
+    margin-left: 62px;
+}
+
+.commentSeparator {
+    display: none;
+}
+
+.postPage .commentSeparator {
+    display: inherit;
+}
+
+.postPage .postBody {
+    margin-left: 62px;
+    font-size: 24px;
+    padding: 20px 0;    
+}

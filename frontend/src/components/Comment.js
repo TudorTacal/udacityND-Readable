@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import deleteCommentAsync from "../actions/deleteComment";
 import upVoteCommentAsync from "../actions/upVoteComment";
 import downVoteCommentAsync from "../actions/downVoteComment";
+import FaPencil from "react-icons/lib/fa/pencil";
+import FaTrashO from "react-icons/lib/fa/trash-o";
+import FaArrowUp from "react-icons/lib/fa/arrow-up";
+import FaArrowDown from "react-icons/lib/fa/arrow-down";
 
 
 class Comment extends React.Component {
@@ -12,30 +16,26 @@ class Comment extends React.Component {
     const { comment } = this.props;
     return (
       <div className="comment">
+        <div className="voteBox">
+            <button className="upVote" onClick={() => { return this.props.upVoteComment(comment.id);}}>
+                <FaArrowUp className="faArrowUp" size={12} />
+            </button><br/>       
+            <span className="voteScore">{comment.voteScore}</span><br/> 
+            <button className="downVote" onClick={() => { return this.props.downVoteComment(comment.id);}}>
+                <FaArrowDown className="faArrowDown" size={12}/>
+            </button><br/>
+        </div>
         <p>{comment.body}</p>
         <span>Author: {comment.author}</span>
         <span>Time: {new Date(comment.timestamp).toGMTString()}</span>
-        <span>Votes: {comment.voteScore}</span>
-        <button
-          onClick={() => {
-            return this.props.upVoteComment(comment.id);
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            return this.props.downVoteComment(comment.id);
-          }}
-        >
-          -
-        </button>
-        <Link className="editComment" to={`/comments/${comment.id}`}>
-          Edit comment
-        </Link>
-        <button className="deleteComment" onClick={() => this.props.deleteComment(comment.id)}>
-          Delete comment
-        </button>       
+        <div className="commentControlBox small">
+            <Link className="editComment" to={`/comments/${comment.id}`}>
+                <FaPencil className="faPencil" size={12}/>
+            </Link> 
+            <button className="deleteComment" onClick={() => this.props.deleteComment(comment.id)}>
+                <FaTrashO className="faTrashOComment" size={12}/>
+            </button>  
+        </div>     
       </div>
     );
   }

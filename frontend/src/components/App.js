@@ -19,6 +19,7 @@ import Modal from "react-modal";
 import AddComment from './AddComment';
 import FaPencil from "react-icons/lib/fa/pencil";
 import FaPlus from "react-icons/lib/fa/plus";
+import Fragment from 'react-addons-create-fragment'; 
 Modal.setAppElement("body");
 
 class App extends Component {
@@ -123,13 +124,13 @@ class App extends Component {
                     <PostForm type="create" onInputChange={this.handleInputChange} values={this.state} onSubmitClick={this.createPostHandler}/>
                 )}/>
                 {posts.map(post => (
-                    <div key={post.id}>
+                    <Fragment key={post.id}>
                         <Route 
                             exact
                             path={`/${post.category}/${post.id}`}
                             render={() => (
-                                <div>
-                                    <Post post={post} displayComments={true}/>
+                                <div className="postPage">
+                                    <Post  post={post} displayComments={true}/>
                                     <AddComment post={post} onInputChange={this.handleInputChange}/>
                                 </div>
                             )}/>
@@ -139,7 +140,7 @@ class App extends Component {
                             render={() => (
                                 <EditPostForm type="edit" post={post} onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post.id)}/>
                             )}/>
-                    </div>
+                    </Fragment>
                 ))}
                 {this.props.comments.map(comment => (
                      <Route key={comment.id}
