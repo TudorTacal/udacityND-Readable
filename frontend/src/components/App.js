@@ -43,7 +43,6 @@ class App extends Component {
         let postData = this.state;
         this.props.createPost(postData);
         this.clearForm(postData);
-        console.log(this.state);
     }
 
     clearForm(data){
@@ -59,11 +58,12 @@ class App extends Component {
         let commentData = { timestamp, body };
         this.props.editComment(id, commentData);    
     }
-    editPostHandler(id) {
-        let title = this.state.title;
-        let body = this.state.body;
+    editPostHandler(post) {
+        let title = this.state.title || post.title;
+        let body = this.state.body || post.body;
         let postData = { title, body};
-        this.props.editPost(id, postData);
+        this.props.editPost(post.id, postData);
+        this.clearForm(postData);
     }
 
     handleInputChange(event) {
@@ -138,7 +138,7 @@ class App extends Component {
                             exact
                             path={`/posts/${post.id}`}
                             render={() => (
-                                <EditPostForm type="edit" post={post} onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post.id)}/>
+                                <EditPostForm type="edit" post={post} onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post)}/>
                             )}/>
                     </Fragment>
                 ))}

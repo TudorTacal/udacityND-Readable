@@ -17,12 +17,11 @@ function PostForm(props) {
                 placeholder="Enter title"
                 name="title"
                 onChange={props.onInputChange}
-                value={props.values.title}
             />
         </div>
         <div className="form-group">
             <label htmlFor="body">Post body</label><br/>
-            <textarea placeholder="Enter post body" name="body" id="body" value={props.values.body} onChange={props.onInputChange} />
+            <textarea placeholder="Enter post body" name="body" id="body"  onChange={props.onInputChange} />
          </div>
          <div className="form-group">
             <label htmlFor="author">Author</label>
@@ -33,7 +32,6 @@ function PostForm(props) {
                 placeholder="Author"
                 name="author"
                 onChange={props.onInputChange}
-                value={props.values.author}
              />
          </div>
          <div className="form-group">
@@ -44,7 +42,6 @@ function PostForm(props) {
                 placeholder="Enter a category: react, redux or udacity"
                 name="category"
                 onChange={props.onInputChange}
-                value={props.values.category}
             />
         </div>
       <button className="btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
