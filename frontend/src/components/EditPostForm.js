@@ -3,7 +3,6 @@ import FaClose from "react-icons/lib/fa/close";
 import { Link } from "react-router-dom";
 
 class EditPostForm extends React.Component{
-
     render() {
         return (
             <form className={`${this.props.type}Form`} onSubmit={event => event.preventDefault()}>
