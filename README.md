@@ -48,8 +48,8 @@ Information about the API server and how to use it can be found in its [README f
 
 ### To do's
 
-    * Deploy to Heroku
-    * Extract small bits of code into their own component like `EditCommentForm`
-    * Write tests
+* Deploy to Heroku
+* Extract small bits of code into their own component like `EditCommentForm`
+* Write tests
 
 
