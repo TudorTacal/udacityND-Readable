@@ -20,15 +20,15 @@ This repository includes the code for both the backend API Server and the front-
 
 ## Components
 
-    -  `App`
-    -  `Post`
-    -  `PostsList`
-    -  `PostForm`
-    -  `PostsOrderChanger`
-    -  `EditPostForm`
-    -  `Comment`
-    -  `AddComment`
-    -  `CategoriesList`
+    *  `<App/>`
+    *  `<Post/>`
+    *  `<PostsList/>`
+    *  `<PostForm/>`
+    *  `<PostsOrderChanger/>`
+    *  `<EditPostForm/>`
+    *  `<Comment/>`
+    *  `<AddComment/>`
+    *  `<CategoriesList/>`
 
 ## Extra info
 
