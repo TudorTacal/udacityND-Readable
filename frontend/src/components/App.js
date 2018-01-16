@@ -53,11 +53,12 @@ class App extends Component {
         }
     }
 
-    editCommentHandler(id) {
+    editCommentHandler(comment) {
         let timestamp = Date.now();
-        let body = this.state.body;
+        let body = this.state.body || comment.body;
         let commentData = { timestamp, body };
-        this.props.editComment(id, commentData);    
+        this.props.editComment(comment.id, commentData); 
+        this.clearForm(commentData);   
     }
     editPostHandler(post) {
         let title = this.state.title || post.title;
@@ -150,12 +151,11 @@ class App extends Component {
                         <button style={{color: 'black', float: "right", background: "none", border: 0}} onClick={this.props.history.goBack}>
                             <FaClose style={{float: "right"}} size={12}/>
                         </button>
-                        {console.log(comment)}
                         <div className="form-group">
                             <label htmlFor="editTitle">Edit comment</label><br/>
                             <textarea placeholder="Body" name="body" onChange={this.handleInputChange} defaultValue={comment.body}/>
                         </div>
-                        <input type="submit" value="Submit" onClick={() => this.editCommentHandler(comment.id)} />
+                        <input type="submit" value="Submit" onClick={() => this.editCommentHandler(comment)} />
                     </form>
                 )}/>
         ))}
