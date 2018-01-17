@@ -10,6 +10,7 @@ import FaArrowUp from "react-icons/lib/fa/arrow-up";
 import FaArrowDown from "react-icons/lib/fa/arrow-down";
 import FaTrashO from "react-icons/lib/fa/trash-o";
 import FaPencil from "react-icons/lib/fa/pencil";
+import posts from "../reducers/postsReducer";
 
 
 class Post extends React.Component {
@@ -72,11 +73,8 @@ class Post extends React.Component {
     );
   }
 }
-function mapStateToProps(state) {
-    const props = Object.assign({}, state, {
-        comments: state.posts.comments
-    })
-    return props;
+function mapStateToProps({posts}) {
+    return  { comments: posts.comments };
 }
 
 function mapDispatchToProps(dispatch) {
