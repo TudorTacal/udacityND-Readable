@@ -42,7 +42,7 @@ class App extends Component {
 
     createPostHandler() {
         let postData = this.state;
-        this.props.createPost(postData);
+        this.props.createPostAsync(postData);
         this.clearForm(postData);
     }
 
@@ -57,14 +57,14 @@ class App extends Component {
         let timestamp = Date.now();
         let body = this.state.body || comment.body;
         let commentData = { timestamp, body };
-        this.props.editComment(comment.id, commentData); 
+        this.props.editCommentAsync(comment.id, commentData); 
         this.clearForm(commentData);   
     }
     editPostHandler(post) {
         let title = this.state.title || post.title;
         let body = this.state.body || post.body;
         let postData = { title, body};
-        this.props.editPost(post.id, postData);
+        this.props.editPostAsync(post.id, postData);
         this.clearForm(postData);
     }
 
@@ -79,8 +79,8 @@ class App extends Component {
     }
 
   componentDidMount() {
-    this.props.getPosts();
-    this.props.getCategories();
+    this.props.getPostsAsync();
+    this.props.getCategoriesAsync();
   }
   render() {
     let posts = this.props.posts;
@@ -98,7 +98,7 @@ class App extends Component {
                         </button>
                     </Link> 
                     <PostsList posts={posts} />
-                    <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>      
+                    <PostsOrderChanger onChangeHandler={this.props.orderPostsAsync}/>      
                 </div>
         )}/>
         
@@ -174,27 +174,7 @@ function mapStateToProps(state) {
   return props;
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getPosts: () => {
-      dispatch(getPostsAsync());
-    },
-    getCategories: () => {
-      dispatch(getCategoriesAsync());
-    }, 
-    createPost: (values) => {
-        dispatch(createPostAsync(values));
-    },
-    orderPosts: (orderPostsBy) => {
-        dispatch(orderPostsAsync(orderPostsBy));
-    },
-    editPost: (id, values) => {
-        dispatch(editPostAsync(id, values));
-    },
-    editComment: (id, values) => {
-        dispatch(editCommentAsync(id, values));
-    }
-  };
-}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps,
+     { getPostsAsync, getCategoriesAsync, createPostAsync,
+        orderPostsAsync, editPostAsync, editCommentAsync})(App));
