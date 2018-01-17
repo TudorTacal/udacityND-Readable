@@ -1,6 +1,6 @@
 import { fetchCommentCreate } from "../utils/readableApi";
 import uuidv4  from 'uuid/v4';
-export const CREATE_COMMENT = "CREATE_COMMENT";
+import { CREATE_COMMENT } from "./types";
 
 function createComment(commentData) {
     return {

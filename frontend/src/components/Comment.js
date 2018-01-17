@@ -40,10 +40,6 @@ class Comment extends React.Component {
     );
   }
 }
-function mapStateToProps(state) {
-    const props = {};
-    return props;
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -59,4 +55,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comment);
+export default connect(null, mapDispatchToProps)(Comment);
