@@ -35,15 +35,13 @@ function PostForm(props) {
              />
          </div>
          <div className="form-group">
-            <label htmlFor="author">Category</label>
-            <input
-                className="form-control"              
-                type="text"
-                placeholder="Enter a category: react, redux or udacity"
-                name="category"
-                onChange={props.onInputChange}
-            />
-        </div>
+            <select className="btn btn-secondary dropdown-toggle" defaultValue="default" name="category" onChange={props.onInputChange}>
+                <option disabled="true" value="default" >Category</option>
+                <option className="dropdown-item" >react</option>
+                <option className="dropdown-item" >redux</option>
+                <option className="dropdown-item" >udacity</option>
+            </select>
+         </div>
       <button className="btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
         Submit
       </button>
