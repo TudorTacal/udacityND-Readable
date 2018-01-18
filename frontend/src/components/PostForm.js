@@ -42,9 +42,9 @@ function PostForm(props) {
                 <option className="dropdown-item" >udacity</option>
             </select>
          </div>
-      <button className="btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
+      <Link to="/" className="link btn btn-primary" type="submit" value="Submit" onClick={props.onSubmitClick}>
         Submit
-      </button>
+      </Link>
     </form>
   );
 }

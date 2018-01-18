@@ -44,6 +44,7 @@ class App extends Component {
         let postData = this.state;
         this.props.createPostAsync(postData);
         this.clearForm(postData);
+        
     }
 
     clearForm(data){
@@ -72,8 +73,6 @@ class App extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log("target.name",name);
-        console.log("target.value",value);
         this.setState({
             [name]: value
           });
