@@ -21,6 +21,7 @@ import FaPencil from "react-icons/lib/fa/pencil";
 import FaPlus from "react-icons/lib/fa/plus";
 import Fragment from 'react-addons-create-fragment'; 
 import FaClose from "react-icons/lib/fa/close";
+import NotFoundPage from "./NotFoundPage";
 
 Modal.setAppElement("body");
 
@@ -121,7 +122,10 @@ class App extends Component {
         />
         ))}
         <Route exact path="/posts" render={() => (
-            <PostForm type="create" onInputChange={this.handleInputChange} values={this.state} onSubmitClick={this.createPostHandler}/>
+            <PostForm type="create" 
+                onInputChange={this.handleInputChange} 
+                values={this.state}
+                onSubmitClick={this.createPostHandler}/>
         )}/>
         {posts.map(post => (
             <Fragment key={post.id}>
@@ -130,8 +134,11 @@ class App extends Component {
                     path={`/${post.category}/${post.id}`}
                     render={() => (
                         <div className="postPage">
-                            <Post  post={post} displayComments={true}/>
-                            <AddComment post={post} onInputChange={this.handleInputChange}/>
+                                <Fragment>
+                                    <Post  post={post} displayComments={true}/>
+                                    <AddComment post={post} onInputChange={this.handleInputChange}/>
+                                </Fragment>
+                            
                         </div>
                     )}/>
                 <Route 

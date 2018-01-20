@@ -86,7 +86,7 @@ class AddComment extends React.Component {
                         onChange={this.handleInputChange}
                     />
                 </div>
-                <button className="btn btn-primary" to="/" type="submit" value="Submit" onClick={parentId => {this.handleSubmit(this.props.post.id); this.closeCommentModal()}} >
+                <button className="btn btn-primary" type="submit" value="Submit" onClick={(parentId) => {this.handleSubmit(this.props.post.id); this.closeCommentModal()}} >
                     Submit
                 </button>
           </form>
