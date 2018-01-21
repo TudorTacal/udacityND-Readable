@@ -41,6 +41,8 @@ class AddComment extends React.Component {
     return this.setState({ commentModalOpen: false });
   }
   render() {
+    let postId = this.props.match.params.id;
+    let post = this.props.posts.find(post => post.id == postId);
     return (
       <div>
         <button className="addPostButton btn btn-secondary btn-sm" onClick={() => this.openCommentModal()}>
@@ -86,7 +88,8 @@ class AddComment extends React.Component {
                         onChange={this.handleInputChange}
                     />
                 </div>
-                <button className="btn btn-primary" type="submit" value="Submit" onClick={(parentId) => {this.handleSubmit(this.props.post.id); this.closeCommentModal()}} >
+                <button className="btn btn-primary" type="submit" value="Submit"
+                        onClick={() => {this.handleSubmit(post.id); this.closeCommentModal()}} >
                     Submit
                 </button>
           </form>

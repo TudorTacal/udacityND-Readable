@@ -23,6 +23,7 @@ import Fragment from 'react-addons-create-fragment';
 import FaClose from "react-icons/lib/fa/close";
 import NotFoundPage from "./NotFoundPage";
 import PostPage from "./PostPage";
+import EditCommentForm from "./EditCommentForm";
 
 Modal.setAppElement("body");
 
@@ -40,6 +41,7 @@ class App extends Component {
         this.createPostHandler = this.createPostHandler.bind(this);
         this.editPostHandler = this.editPostHandler.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.editCommentHandler = this.editCommentHandler.bind(this);
     }
 
     createPostHandler() {
@@ -87,6 +89,7 @@ class App extends Component {
   render() {
     let posts = this.props.posts;
     let categories = this.props.categories;
+    let comments = this.props.comments;
     return (
         <div className="App container" >
             <Link className="title" to="/">Readable</Link>
@@ -132,35 +135,19 @@ class App extends Component {
                         <PostsList {...props} posts={posts}/>
                         <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                     </div>
-                    )}
-                    
-                />
+                )}/>
+                <Route exact path="/comments/:id" render={(props) => (
+                    <EditCommentForm {...props} onInputChange={this.handleInputChange}
+                         onSubmitClick={this.editCommentHandler} comments={comments}/>
+                )}/>
                 <Route exact path="/:category/:id"
                     render={(props) => (
                         <div className="postPage">
                             <PostPage {...props} posts={posts} />
                             <AddComment {...props} posts={posts} onInputChange={this.handleInputChange}/>
                         </div>
-                    )}/>
-               
-            </Switch>
-        {this.props.comments.map(comment => (
-                <Route key={comment.id}
-                exact
-                path={`/comments/${comment.id}`}
-                    render={() => (
-                    <form className="editCommentForm" onSubmit={(event) => event.preventDefault() }>
-                        <button style={{color: 'black', float: "right", background: "none", border: 0}} onClick={this.props.history.goBack}>
-                            <FaClose style={{float: "right"}} size={12}/>
-                        </button>
-                        <div className="form-group">
-                            <label htmlFor="editTitle">Edit comment</label><br/>
-                            <textarea placeholder="Body" name="body" onChange={this.handleInputChange} defaultValue={comment.body}/>
-                        </div>
-                        <input type="submit" value="Submit" onClick={() => this.editCommentHandler(comment)} />
-                    </form>
                 )}/>
-        ))}
+            </Switch>
     </div>
     );
   }
