@@ -6,10 +6,13 @@ import Post from "./Post";
 
 class PostsList extends React.Component {
   render() {
+    let category = this.props.match.params.category;
+    let posts = category ? this.props.posts.filter(post => post.category === category)
+                         : this.props.posts;
     return (
       <div className="posts">
         <ul>
-          {this.props.posts.map(post => (
+          {posts.map(post => (
             <li className='post' key={post.id}>
               <Post post={post} />
             </li>

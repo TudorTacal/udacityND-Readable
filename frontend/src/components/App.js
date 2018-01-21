@@ -8,7 +8,7 @@ import orderPostsAsync from "../actions/orderPosts";
 import editPostAsync from "../actions/editPost";
 import editCommentAsync from "../actions/editComment";
 import { fetchPosts } from "../utils/readableApi";
-import { Route, Router, Link, withRouter} from "react-router-dom";
+import { Route, Router, Link, withRouter, Switch } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
 import PostsList from "./PostsList";
 import PostsOrderChanger from "./PostsOrderChanger";
@@ -89,44 +89,44 @@ class App extends Component {
     return (
         <div className="App container" >
             <Link className="title" to="/">Readable</Link>
-            <Route exact path="/" render={(history) => (
-                <div>
-                    <CategoriesList categories={categories}/>
-                    <Link className="addPost" to="/posts">
-                        <button type="button" className="addPostButton btn btn-secondary btn-sm">
-                            <span>Add post</span> 
-                            <FaPlus size={12}/>
-                        </button>
-                    </Link> 
-                    <PostsList posts={posts} />
-                    <PostsOrderChanger onChangeHandler={this.props.orderPostsAsync}/>      
-                </div>
-        )}/>
+            <Switch>
+                <Route exact path="/" render={(props) => (
+                    <div>
+                        <CategoriesList categories={categories}/>
+                        <Link className="addPost" to="/posts">
+                            <button type="button" className="addPostButton btn btn-secondary btn-sm">
+                                <span>Add post</span> 
+                                <FaPlus size={12}/>
+                            </button>
+                        </Link> 
+                        <PostsList {...props} posts={posts} />
+                        <PostsOrderChanger onChangeHandler={this.props.orderPostsAsync}/>      
+                    </div>
+                )}/>
+                  <Route exact path="/posts" render={(props) => (
+                    <PostForm type="create" 
+                        onInputChange={this.handleInputChange} 
+                        values={this.state}
+                        onSubmitClick={this.createPostHandler}
+                    />
+                )}/>
+                <Route exact path="/:category"
+                    render={(props) => (
+                    <div>
+                        <CategoriesList categories={categories}/>
+                        <Link className="addPost" to="/posts">
+                            <button type="button" className="addPostButton btn btn-secondary btn-sm">
+                                <span>Add post</span> 
+                                <FaPlus size={12}/>
+                            </button>
+                        </Link> 
+                        <PostsList {...props} posts={posts}/>
+                        <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
+                    </div>
+                    )}
+                />
+                </Switch>
         
-        {categories.map(category => (
-            <Route exact key={category.name}
-                path={`/${category.path}`}
-                render={(history) => (
-                <div>
-                    <CategoriesList categories={categories}/>
-                    <Link className="addPost" to="/posts">
-                        <button type="button" className="addPostButton btn btn-secondary btn-sm">
-                            <span>Add post</span> 
-                            <FaPlus size={12}/>
-                        </button>
-                    </Link> 
-                    <PostsList posts={posts.filter(post => post.category === category.name)}/>
-                    <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
-                </div>
-            )}
-        />
-        ))}
-        <Route exact path="/posts" render={() => (
-            <PostForm type="create" 
-                onInputChange={this.handleInputChange} 
-                values={this.state}
-                onSubmitClick={this.createPostHandler}/>
-        )}/>
         {posts.map(post => (
             <Fragment key={post.id}>
                 <Route 

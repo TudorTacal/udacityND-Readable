@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function PostForm(props) {
   return (
     <form className={`${props.type}Form`} onSubmit={event => event.preventDefault()}>
-        <Link style={{color: 'black'}}to="/">
+        <Link style={{color: 'black'}} to="/">
             <FaClose style={{float: "right"}} size={12}/>
         </Link>
         <div className="form-group">
