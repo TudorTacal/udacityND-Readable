@@ -30,7 +30,7 @@ class Post extends React.Component {
         return this.setState({[name]: value});
     }
 
-    componentWillMount() {
+    componentDidMount() {
         return this.props.getComments(this.props.post.id);
     }
   render() {

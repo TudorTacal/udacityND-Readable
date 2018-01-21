@@ -22,6 +22,7 @@ import FaPlus from "react-icons/lib/fa/plus";
 import Fragment from 'react-addons-create-fragment'; 
 import FaClose from "react-icons/lib/fa/close";
 import NotFoundPage from "./NotFoundPage";
+import PostPage from "./PostPage";
 
 Modal.setAppElement("body");
 
@@ -51,7 +52,7 @@ class App extends Component {
     clearForm(data){
         for(let property in data) {
             if(data.hasOwnProperty(property))
-                this.setState({[property]: ""}, function (){console.log(this.state)})            
+                this.setState({[property]: ""});            
         }
     }
 
@@ -103,6 +104,14 @@ class App extends Component {
                         <PostsOrderChanger onChangeHandler={this.props.orderPostsAsync}/>      
                     </div>
                 )}/>
+                 <Route exact path={`/posts/:id`}
+                    render={(props) => (
+                        <EditPostForm {...props} posts={posts} 
+                            type="edit" 
+                            onInputChange={this.handleInputChange}
+                            onSubmitClick={this.editPostHandler}
+                        />
+                )}/>
                   <Route exact path="/posts" render={(props) => (
                     <PostForm type="create" 
                         onInputChange={this.handleInputChange} 
@@ -124,31 +133,17 @@ class App extends Component {
                         <PostsOrderChanger onChangeHandler={this.props.orderPosts}/>
                     </div>
                     )}
+                    
                 />
-                </Switch>
-        
-        {posts.map(post => (
-            <Fragment key={post.id}>
-                <Route 
-                    exact
-                    path={`/${post.category}/${post.id}`}
-                    render={() => (
+                <Route exact path="/:category/:id"
+                    render={(props) => (
                         <div className="postPage">
-                                <Fragment>
-                                    <Post  post={post} displayComments={true}/>
-                                    <AddComment post={post} onInputChange={this.handleInputChange}/>
-                                </Fragment>
-                            
+                            <PostPage {...props} posts={posts} />
+                            <AddComment {...props} posts={posts} onInputChange={this.handleInputChange}/>
                         </div>
                     )}/>
-                <Route 
-                    exact
-                    path={`/posts/${post.id}`}
-                    render={() => (
-                        <EditPostForm type="edit" post={post} onInputChange={this.handleInputChange} onSubmitClick={() => this.editPostHandler(post)}/>
-                    )}/>
-            </Fragment>
-        ))}
+               
+            </Switch>
         {this.props.comments.map(comment => (
                 <Route key={comment.id}
                 exact

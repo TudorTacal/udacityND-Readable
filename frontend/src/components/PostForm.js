@@ -3,6 +3,7 @@ import FaClose from "react-icons/lib/fa/close";
 import { Link } from "react-router-dom";
 
 function PostForm(props) {
+
   return (
     <form className={`${props.type}Form`} onSubmit={event => event.preventDefault()}>
         <Link style={{color: 'black'}} to="/">

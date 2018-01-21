@@ -9,7 +9,6 @@ function editPost(postData) {
 }
 
 function editPostAsync(id, postData) {
-    console.log(postData);
     return dispatch => {
         fetchPostUpdate(id, postData).then(res => res.json()).then(data => dispatch(editPost(data)));
     }

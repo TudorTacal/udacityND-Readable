@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 class EditPostForm extends React.Component{
     render() {
+        let postId = this.props.match.params.id;
+        let post = this.props.posts.find(post => post.id == postId);
         return (
             <form className={`${this.props.type}Form`} onSubmit={event => event.preventDefault()}>
                 <Link style={{color: 'black'}}to="/">
@@ -16,15 +18,15 @@ class EditPostForm extends React.Component{
                         type="text"
                         name="title"
                         id="editTitle"
-                        defaultValue={this.props.post.title}
+                        defaultValue={post.title}
                         onChange={this.props.onInputChange}
                     />
                 </div>
                 <div className="form-group">
                     <label htmlFor="editTitle">Body</label><br/>
-                    <textarea name="body" className="editBodyTextArea" onChange={this.props.onInputChange} defaultValue={this.props.post.body}/>
+                    <textarea name="body" className="editBodyTextArea" onChange={this.props.onInputChange} defaultValue={post.body}/>
                 </div>
-            <Link   className="btn btn-primary" to="/" type="submit" value="Submit" onClick={this.props.onSubmitClick} >
+            <Link className="btn btn-primary" to="" type="submit" value="Submit" onClick={() => {this.props.onSubmitClick(post);this.props.history.goBack()}} >
                 Submit
             </Link>
             </form>
