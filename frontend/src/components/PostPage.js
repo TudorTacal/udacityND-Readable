@@ -7,7 +7,7 @@ class PostPage extends React.Component {
     let post = this.props.posts.find(post => post.id == postId);
     return (
       <div >
-          <Post post={post} displayComments={true}/>
+          <Post parentPost={post} displayComments={true} {...this.props}/>
       </div>
     );
   }

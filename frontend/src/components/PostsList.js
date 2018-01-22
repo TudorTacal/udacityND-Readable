@@ -14,7 +14,7 @@ class PostsList extends React.Component {
         <ul>
           {posts.map(post => (
             <li className='post' key={post.id}>
-              <Post post={post} />
+              <Post post={post} {...this.props}/>
             </li>
           ))}
         </ul>

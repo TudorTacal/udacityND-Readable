@@ -1,4 +1,5 @@
 import { GET_POSTS } from '../actions/getPosts';
+import { GET_POST } from '../actions/getPost';
 import { ORDER_POSTS } from '../actions/orderPosts';
 import { UP_VOTE_POST } from '../actions/upVotePost';
 import { DOWN_VOTE_POST } from '../actions/downVotePost';
@@ -22,6 +23,9 @@ function posts(state = initialState, action) {
     case GET_POSTS: {
       return Object.assign({}, state, { posts: action.posts });
     }
+    case GET_POST: {
+        return Object.assign({}, state, { post: action.post });
+      }
     case ORDER_POSTS: {
         let orderedPosts =  action.orderedPosts.map(post => post);
         return Object.assign({}, state, { posts: orderedPosts});
