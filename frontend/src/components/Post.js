@@ -12,6 +12,7 @@ import FaTrashO from "react-icons/lib/fa/trash-o";
 import FaPencil from "react-icons/lib/fa/pencil";
 import posts from "../reducers/postsReducer";
 import getPostAsync from "../actions/getPost";
+import NotFoundPage from "./NotFoundPage";
 
 class Post extends React.Component {
     constructor(props) {
@@ -30,13 +31,11 @@ class Post extends React.Component {
         return this.setState({[name]: value});
     }
 
-    componentDidMount() {
-        let postId = this.props.match.params.id
-        postId ? this.props.getPost(this.props.match.params.id) : null;
-        this.props.getComments(postId? this.props.match.params.id : this.props.post.id);
+    componentDidMount() {  
+        this.props.getComments(this.props.post.id);
     }
   render() {
-    const post  = this.props.post || this.props.parentPost || this.props.retrievedPost || {};
+    const post  = this.props.post;
     return (
       <div className="postContainer">
         <div className="voteBox"> 
@@ -76,7 +75,7 @@ class Post extends React.Component {
   }
 }
 function mapStateToProps({posts}) {
-    return { comments: posts.comments, retrievedPost: posts.post};
+    return { comments: posts.comments };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -92,9 +91,6 @@ function mapDispatchToProps(dispatch) {
     },
     deletePost: (id) => {
         dispatch(deletePostAsync(id));
-    },
-    getPost: (id) => {
-        dispatch(getPostAsync(id));
     }
   };
 }

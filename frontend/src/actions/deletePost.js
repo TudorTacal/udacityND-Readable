@@ -10,7 +10,7 @@ function deletePost(post) {
 
 function deletePostAsync(id) {    
     return dispatch => {
-        fetchPostDelete(id).then(res => res.json()).then(data => {console.log(data); return dispatch(deletePost(data))});
+        fetchPostDelete(id).then(res => res.json()).then(data => {return dispatch(deletePost(data))});
     }
 }
 

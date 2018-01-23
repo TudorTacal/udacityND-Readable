@@ -143,7 +143,7 @@ class App extends Component {
                 <Route exact path="/:category/:id"
                     render={(props) => (
                         <div className="postPage">
-                            <PostPage {...props} posts={posts} />
+                            <PostPage {...props} />
                             <AddComment {...props} posts={posts} onInputChange={this.handleInputChange}/>
                         </div>
                 )}/>
