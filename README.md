@@ -6,6 +6,34 @@ Readable is a content and comment web app build with React and Redux. Users will
 
 This repository includes the code for both the backend API Server and the front-end portion of the project.
 
+## Screenshots
+
+Main page
+
+![ReadableMainPage](./screenshots/ReadableMainPage.png "Main Page")
+
+Add Post
+
+![ReadableAddPost](./screenshots/ReadableAddPost.png "Add Post")
+
+Post Page 
+
+![ReadablePostPage](./screenshots/ReadablePostPage.png "Post Page")
+
+Add Comment
+
+![ReadableAddComment](./screenshots/ReadableAddComment.png "Add Comment")
+
+Category Page
+
+![ReadableCategoryPage](./screenshots/ReadableCategoryPage.png "Category Page")
+
+
+
+
+
+
+
 ## To start the project
 
 * Install and start the API server
